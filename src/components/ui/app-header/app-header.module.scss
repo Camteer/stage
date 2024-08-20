@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--width);
+  width: 100%;
+}
+
+.headerNav { 
+    min-width: 172px;
+    
+}

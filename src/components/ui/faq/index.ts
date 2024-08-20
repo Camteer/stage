@@ -1,0 +1,1 @@
+export { FaqUI } from './faq';
