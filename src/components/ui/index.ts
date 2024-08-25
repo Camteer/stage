@@ -8,3 +8,5 @@ export * from "./card";
 export * from "./card-blog";
 export * from "./faq";
 export * from "./footer";
+export * from './filter'
+export * from './catalog-container'

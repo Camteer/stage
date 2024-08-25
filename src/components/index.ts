@@ -7,3 +7,5 @@ export * from "./faq"
 export * from "./carousel-better"
 export * from './card-blog'
 export * from './footer'
+export * from './catalog'
+export * from './product'

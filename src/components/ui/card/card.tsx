@@ -30,17 +30,18 @@ export const CardUI: React.FC<TCardUIProps> = ({
       )}
     >
       <div className="flex justify-center  rounded-t-[20px] bg-secondary  h-[188px] bg-cover bg-center">
+        <Link href={`/products/${id}`}>
         <Image
-          className={"bg-cover rounded-t-[20px] bg-center w-full"}
+          className={"bg-cover rounded-t-[20px] bg-center w-full h-full"}
           width={256}
-          height={188}
+          height={190}
           src={imageUrl}
           alt={`${title}`}
-        />
+        /></Link>
       </div>
 
-      <div className="pt-[20px] relative z-[3] pr-[26px]  pl-[24px]">
-        <div className="relative z-[2]">
+      <div className="pt-[20px] relative  pr-[26px]  pl-[24px]">
+        <div className="relative">
           <Title
             title={title}
             className=" font-bold text-[14px] leading-[17px]"
@@ -56,7 +57,7 @@ export const CardUI: React.FC<TCardUIProps> = ({
             </Button>
           </div>
         </div>
-        <div className={cn("relative z-[1]")}>
+        <div className={cn("relative ")}>
           <div
             className={cn(
               "grid gap grid-cols-3",

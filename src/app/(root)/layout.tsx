@@ -2,10 +2,6 @@ import { AppHeader, Categories, Footer } from "@/components";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Stage",
-  description: "choose store",
-};
 
 export default function HomeLayout({
   children,
