@@ -9,7 +9,7 @@ type TBrandsSvgUIProps = {
 
 export const BrandsSvgUI: FC<TBrandsSvgUIProps> = ({ type, className }) => {
   switch (type) {
-    case "porsche":
+    case "Porsche":
       return (
         <svg
           version="1.0"
@@ -108,7 +108,7 @@ c77 0 147 -3 156 -6 20 -8 45 -56 45 -89 0 -22 4 -25 35 -25 35 0 35 1 35 43
         </svg>
       );
       break;
-    case "nike":
+    case "Nike":
       return (
         <svg
           version="1.0"
@@ -165,10 +165,10 @@ c77 0 147 -3 156 -6 20 -8 45 -56 45 -89 0 -22 4 -25 35 -25 35 0 35 1 35 43
         </svg>
       );
       break;
-    case "puma":
+    case "Puma":
       return <></>;
       break;
-    case "newbalance":
+    case "Newbalance":
       return (
         <svg
           version="1.0"
@@ -306,7 +306,7 @@ c77 0 147 -3 156 -6 20 -8 45 -56 45 -89 0 -22 4 -25 35 -25 35 0 35 1 35 43
         </svg>
       );
       break;
-    case "vans":
+    case "Vans":
       return (
         <svg
           version="1.0"
@@ -399,7 +399,7 @@ c77 0 147 -3 156 -6 20 -8 45 -56 45 -89 0 -22 4 -25 35 -25 35 0 35 1 35 43
         </svg>
       );
       break;
-    case "reebook":
+    case "Reebook":
       return <></>;
       break;
     default:

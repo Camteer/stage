@@ -14,20 +14,19 @@ import { Title } from "../title";
 
 export function Brands() {
   const brands = [
-    "porsche",
-    "newbalance",
-    "nike",
-    "porsche",
-    "newbalance",
-    "nike",
-    "porsche",
-    "newbalance",
-    "nike",
-
-    "vans",
-
-    "vans",
+    "Porsche",
+    "Newbalance",
+    "Nike",
+    "Porsche",
+    "Newbalance",
+    "Nike",
+    "Porsche",
+    "Newbalance",
+    "Nike",
+    "Vans",
+    
   ];
+
   return (
     <Container className="max-w-[1320px] flex-col">
       <Title title="Бренды" weight="900" className="pl-[105px] mb-11" />

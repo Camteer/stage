@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import { hostname } from "os";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -9,11 +10,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname:   "**.gstatic.com"
+        hostname: "**.gstatic.com",
       },
       {
         protocol: "https",
-        hostname:   "**.figma.com"
+        hostname: "**.figma.com",
+      },
+      {
+        protocol: "https",
+        hostname: "dummyimage.com",
       },
     ],
   },

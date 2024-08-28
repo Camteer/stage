@@ -1,7 +1,6 @@
 type TProductUIProps = {
     title: string;
     article: number;
-    imagePre: string;
     images: string[];
     prise: number;
     sizes: number[];

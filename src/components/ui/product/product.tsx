@@ -12,7 +12,7 @@ import Link from "next/link";
 export const ProductUI: FC<TProductUIProps> = ({
   title,
   article,
-  imagePre,
+
   images,
   prise,
   sizes,
@@ -41,14 +41,14 @@ export const ProductUI: FC<TProductUIProps> = ({
               height={540}
               width={729}
               className={cn("rounded-[20px]")}
-              src={imagePre}
+              src={images[0]}
               alt={"imagePre"}
             ></Image>
             <span className="absolute top-[15px] right-[15px] ">
               <Heart size={45} className={cn("", style.heart)} />
             </span>
             <div className={cn("flex w-full justify-between mt-5")}>
-              {images.map((image, index) => (
+              {images.slice(1).map((image, index) => (
                 <Image
                   key={index}
                   height={118}

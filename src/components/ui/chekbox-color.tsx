@@ -8,10 +8,11 @@ import { TFiltersResponse } from "@/lib/types";
 
 import { Skeleton } from "./skeleton";
 import { Title } from "../title";
+import { Checkbox } from "@radix-ui/react-checkbox";
 
 interface Props {
   items: TFiltersResponse[keyof TFiltersResponse];
-  title: string;
+
   limit?: number;
   loading?: boolean;
   onClickCheckbox?: (id: number) => void;
@@ -21,41 +22,42 @@ interface Props {
   name?: string;
 }
 
-export const CheckboxFiltersGroup: React.FC<Props> = ({
+export const CheckboxFiltersGroupColors: React.FC<Props> = ({
   items,
-  limit = 6,
+
   className,
   loading,
   onClickCheckbox,
   selected,
   name,
-  title,
 }) => {
-  const [showAll, setShowAll] = React.useState(false);
-
-  const list = showAll ? items : items.slice(0, limit);
-
   if (loading) {
     return (
       <div className={className}>
         <Title
-          title={title}
+          title={"Цвет"}
           className={cn(
             "mb-[40px] font-bold text-2xl leading-7 text-[#002C6A]"
           )}
         />
 
-        <Skeleton className="w-[163px] h-[278px] mb-4 rounded-[8px]" />
+        {...Array()
+          .fill(0)
+          .map((_, index) => (
+            <Skeleton
+              key={index}
+              className="h-[33px] w-[156px] mb-4 rounded-[8px]"
+            />
+          ))}
 
         <Skeleton className="w-28 h-6 mb-4 rounded-[8px]" />
       </div>
     );
   }
-
   return (
     <div className={``}>
       <Title
-        title={title}
+        title={"Цвет"}
         className={cn("mb-[40px] font-bold text-2xl leading-7 text-[#002C6A]")}
       />
       <div
@@ -64,30 +66,25 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
           className
         )}
       >
-        {list.map((item, index) => {
-          return (
-            <FilterCheckbox
-              key={index}
-              text={item.name}
-              value={item.id}
-              checked={selected?.has(item.id)}
-              onCheckedChange={() => onClickCheckbox?.(item.id)}
-              name={name}
+        {items.map((item, index) => (
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              onCheckedChange={onCheckedChange}
+              checked={checked}
+              value={value}
+              className="rounded-[5px] w-[33px] h-[33px]  border-[#B3C0D2] border-[3px] data-[state=checked]:bg-[red] data-[state=checked]:border-[red]"
+              id={`checkbox-${String(name)}-${String(value)}`}
             />
-          );
-        })}
+            <label
+              htmlFor={`checkbox-${String(name)}-${String(value)}`}
+              className="leading-none cursor-pointer flex-1 text-wrap"
+            >
+              {text}
+            </label>
+            {endAdornment}
+          </div>
+        ))}
       </div>
-
-      {items.length > limit && (
-        <div className={showAll ? " mt-4" : " "}>
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="text-primary mt-3"
-          >
-            {showAll ? "Скрыть" : "+ Показать все"}
-          </button>
-        </div>
-      )}
     </div>
   );
 };

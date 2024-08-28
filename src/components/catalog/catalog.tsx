@@ -1,5 +1,9 @@
+'use client'
 import { CataloContainerUI, FilterUI } from "@/components/ui";
 import { Card } from "../card";
+import { useDispatch, useSelector } from "@/store/store";
+import { fetchProducts, getProducts } from "@/store/slices/productSlice";
+import { useEffect } from "react";
 
 export default function Catalog({
   type,
@@ -169,6 +173,12 @@ export default function Catalog({
     },
   ];
 
+  const dispatch = useDispatch()
+  const cards = useSelector(getProducts)
+  useEffect(()=> {
+    dispatch(fetchProducts())
+  }, [])
+  console.log(cards, 11)
   return (
     <>
       <div className="flex gap-20 w-full">
