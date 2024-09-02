@@ -1,6 +1,8 @@
 type TCataloContainerUIProps = {
   children: React.ReactNode;
   className?: string;
-  type?: string;
-  size?: string;
+  sortBy?: string;
+  size?: number;
+  loading?: boolean
+  onClickSize: (value: number) => void;
 };

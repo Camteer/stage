@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import style from "./product.module.scss";
 import Link from "next/link";
+import { TProductUIProps } from "./type";
 
 export const ProductUI: FC<TProductUIProps> = ({
   title,

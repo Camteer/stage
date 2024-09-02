@@ -29,3 +29,30 @@ export type TFiltersResponse = {
   colors: TColors[];
   seasons: TSeasons[];
 };
+
+export type TCard = {
+  id: number;
+  image: string[];
+  name: string;
+  description: string;
+  price: number;
+  categoryId: number;
+  seasonId: number;
+  brandId: number;
+  sale: boolean;
+
+
+  StatusLike: boolean;
+
+  season: TSeasons;
+  size: TSizes[];
+  brand: TSeasons;
+  type: TTypes[];
+  color: TColors[];
+  categories: {};
+};
+
+export type TCardResponse = {
+  data: TCard[];
+  total: number;
+};

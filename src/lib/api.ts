@@ -1,4 +1,4 @@
-import { TFiltersResponse } from "./types";
+import { TCard, TCardResponse, TFiltersResponse } from "./types";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
 
@@ -12,5 +12,17 @@ export const getFiltersApi = () =>
       return data;
     });
 
-export const getProductsApi = (query: any = '') =>
-  fetch(`${url}/product?${query}`).then((res) => res.json());
+export const getProductsApi = (query: string = "") =>
+  fetch(`${url}/products?${query}`)
+    .then((res) => checkResponse<TCard[]>(res))
+    .then((data) => {
+      return data;
+    });
+
+export const getProductIdApi = (id: number ) => 
+  fetch(`${url}/products/${id}`)
+    .then((res) => checkResponse<TCard>(res))
+    .then((data) => {
+      return data;
+    });
+;

@@ -7,6 +7,7 @@ import { Heart } from "lucide-react";
 import style from "./card.module.scss";
 import { Title } from "@/components";
 import { cn } from "@/lib/utils";
+import { TCardUIProps } from "./type";
 
 export const CardUI: React.FC<TCardUIProps> = ({
   id,
@@ -69,7 +70,7 @@ export const CardUI: React.FC<TCardUIProps> = ({
               <Button
                 variant={"size"}
                 key={index}
-                children={`${item} EUR`}
+                children={`${item.name} EUR`}
                 className={cn("", style.size)}
               />
             ))}

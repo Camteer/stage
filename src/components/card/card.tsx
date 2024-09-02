@@ -1,6 +1,7 @@
 "use client";
 import { FC, useState } from "react";
 import { CardUI } from "@ui";
+import { TCardUIProps } from "../ui/card/type";
 
 export const Card: FC<TCardUIProps> = ({
   imageUrl,

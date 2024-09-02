@@ -1,4 +1,6 @@
-type TProductUIProps = {
+import { TSizes, TTypes } from "@/lib/types";
+
+export type TProductUIProps = {
     title: string;
     article: number;
     images: string[];

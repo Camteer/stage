@@ -14,9 +14,9 @@ interface Props {
   title: string;
   limit?: number;
   loading?: boolean;
-  onClickCheckbox?: (id: number) => void;
+  onClickCheckbox?: (id: string) => void;
   defaultValue?: string[];
-  selected?: Set<number>;
+  selected?: Set<string>;
   className?: string;
   name?: string;
 }
@@ -70,8 +70,8 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
               key={index}
               text={item.name}
               value={item.id}
-              checked={selected?.has(item.id)}
-              onCheckedChange={() => onClickCheckbox?.(item.id)}
+              checked={selected?.has(String(item.id))}
+              onCheckedChange={() => onClickCheckbox?.(String(item.id))}
               name={name}
             />
           );

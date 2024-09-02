@@ -17,13 +17,21 @@ import {
   getFilters,
   getIsLoading,
 } from "@/store/slices/filtersSlice";
+import { useFilters } from "@/hooks/use-filters";
+import { useQuery, useQueryFilters } from "@/hooks/use-query";
+import { fetchProducts } from "@/store/slices/productSlice";
+
+
+interface IPriceProps {
+  priceFrom: number;
+  priceTo: number;
+}
 
 export const FilterUI: FC<{
   type: "sneakers" | "accessories" | "clothes";
 }> = ({ type }) => {
   const dispatch = useDispatch();
   const { seasons, sizes, brands, types, colors } = useSelector(getFilters);
-  
   const loading = useSelector(getIsLoading);
   useEffect(() => {
     dispatch(fetchFilters());
@@ -31,15 +39,17 @@ export const FilterUI: FC<{
 
   const searchParams = useSearchParams();
 
-  const [range, setRange] = useState<{ from: number; to: number }>({
-    from: 100,
-    to: 10000,
-  });
+  const filters = useFilters();
+
+  useQueryFilters(filters);
 
   const updatePrices = (prices: number[]) => {
-    console.log(prices, 999);
-    setRange({ ...range, from: Number(prices[0]) });
-    setRange({ ...range, to: Number(prices[1]) });
+    filters.setPrices("priceFrom", prices[0]);
+    filters.setPrices("priceTo", prices[1]);
+  };
+
+  const handleFilters = () => {
+    dispatch(fetchProducts(useQuery(filters)));
   };
 
   return (
@@ -47,13 +57,23 @@ export const FilterUI: FC<{
       <div className={cn("flex flex-col gap-16 w-[210px]")}>
         <div className={cn()}>
           <CheckboxFiltersGroup
-            title="Сезон"
+            title="Размеры"
             name="sizes"
             loading={loading}
             className={cn("", style.categories)}
-            onClickCheckbox={() => {
-              console.log("sizes");
-            }}
+            onClickCheckbox={filters.setSizes}
+            selected={filters.sizes}
+            items={sizes}
+          />
+        </div>
+        <div className={cn()}>
+          <CheckboxFiltersGroup
+            title="Сезон"
+            name="season"
+            loading={loading}
+            className={cn("", style.categories)}
+            onClickCheckbox={filters.setSeason}
+            selected={filters.season}
             items={seasons}
           />
         </div>
@@ -64,9 +84,8 @@ export const FilterUI: FC<{
             loading={loading}
             name="colors"
             className={cn("", style.categories)}
-            onClickCheckbox={() => {
-              console.log("colors");
-            }}
+            onClickCheckbox={filters.setColors}
+            selected={filters.colors}
             items={colors}
           />
         </div>
@@ -78,9 +97,8 @@ export const FilterUI: FC<{
               loading={loading}
               name="categories"
               className={cn("", style.categories)}
-              onClickCheckbox={() => {
-                console.log("categories");
-              }}
+              onClickCheckbox={filters.setType}
+              selected={filters.type}
               items={types}
             />
           </div>
@@ -94,9 +112,8 @@ export const FilterUI: FC<{
               loading={loading}
               name="brand"
               className={cn("", style.categories)}
-              onClickCheckbox={() => {
-                console.log("brand");
-              }}
+              onClickCheckbox={filters.setBrand}
+              selected={filters.brands}
               items={brands}
             />
           </div>
@@ -108,9 +125,8 @@ export const FilterUI: FC<{
             title="Sale"
             name="sale"
             className={cn("mt-0", style.categories)}
-            onClickCheckbox={() => {
-              console.log("sale");
-            }}
+            onClickCheckbox={filters.setSale}
+            selected={filters.sale}
             items={[{ id: 1, name: "" }]}
           />
         </div>
@@ -127,16 +143,25 @@ export const FilterUI: FC<{
               min={100}
               max={10000}
               step={100}
-              value={[range.from, range.to]}
+              value={[
+                filters.prices.priceFrom || 100,
+                filters.prices.priceTo || 10000,
+              ]}
               onValueChange={updatePrices}
             />
           </div>
         </div>
-        <Button className="h-[56px] rounded-[50px] bg-[red] text-white text-[18px] font-bold landing-[21px]">
+        <Button
+          className="h-[56px] rounded-[50px] bg-[red] text-white text-[18px] font-bold landing-[21px]"
+          onClick={handleFilters}
+        >
           Применить
         </Button>
         <Button
           disabled={searchParams.size ? false : true}
+          onClick={() => {
+            filters.clearFilters();
+          }}
           className="h-[56px] rounded-[50px] bg-[red] text-white text-[18px] font-bold landing-[21px] disabled:bg-[#B3C0D2]"
         >
           Отменить
