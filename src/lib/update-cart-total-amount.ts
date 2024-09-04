@@ -22,7 +22,7 @@ export const updateCartTotalAmount = async (token: string) => {
   }
 
   const totalAmount = userCart.items.reduce((acc, item) => {
-    return acc + item.productItem.price;
+    return acc + item.productItem.price*item.quantity;
   }, 0);
 
   return await prisma.cart.update({

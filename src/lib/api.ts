@@ -39,7 +39,7 @@ export const getCartApi = () =>
       return data;
     });
 
-export const CartItemApi = (data: CreateCartItemValues) => 
+export const CartItemApi = (data: CreateCartItemValues) =>
   fetch(`${url}/cart`, {
     method: "POST",
     headers: {
@@ -52,13 +52,31 @@ export const CartItemApi = (data: CreateCartItemValues) =>
       return data;
     });
 
-export const changeCartItemCountApi = ({id, quantity}: {id: number, quantity: number}) => 
+export const changeCartItemCountApi = ({
+  id,
+  quantity,
+}: {
+  id: number;
+  quantity: number;
+}) =>
   fetch(`${url}/cart/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({quantity}),
+    body: JSON.stringify({ quantity }),
+  })
+    .then((res) => checkResponse<CartUI>(res))
+    .then((data) => {
+      return data;
+    });
+
+export const deleteCartItemApi = (id: number) =>
+  fetch(`${url}/cart/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
     .then((res) => checkResponse<CartUI>(res))
     .then((data) => {

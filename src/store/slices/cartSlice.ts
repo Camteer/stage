@@ -1,4 +1,4 @@
-import { CartItemApi, changeCartItemCountApi, getCartApi } from "@/lib/api";
+import { CartItemApi, changeCartItemCountApi, deleteCartItemApi, getCartApi } from "@/lib/api";
 import { CartUI, CreateCartItemValues } from "@/lib/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -33,6 +33,11 @@ export const fetchCartAdd = createAsyncThunk(
 export const fetchChangeCartItemCountApi = createAsyncThunk(
   `${CART_SLICES_NAME}/fetchChangeCartItemCountApi`,
   async (data: {id: number, quantity: number}) => changeCartItemCountApi(data)
+);
+
+export const fetchDeleteCartItemCountApi = createAsyncThunk(
+  `${CART_SLICES_NAME}/fetchDeleteCartItemCountApi`,
+  async (id:number) => deleteCartItemApi(id)
 );
 
 const cartSlice = createSlice({
@@ -79,6 +84,18 @@ const cartSlice = createSlice({
         state.cart = action.payload;
       })
       .addCase(fetchChangeCartItemCountApi.rejected, (state) => {
+        state.isLoading = false;
+        state.error = "Не удалось получить cart";
+      })
+      .addCase(fetchDeleteCartItemCountApi.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchDeleteCartItemCountApi.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.cart = action.payload;
+      })
+      .addCase(fetchDeleteCartItemCountApi.rejected, (state) => {
         state.isLoading = false;
         state.error = "Не удалось получить cart";
       })

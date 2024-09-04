@@ -1,13 +1,12 @@
-import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import {} from "@ui";
 import { Button } from "@ui";
-import { Heart } from "lucide-react";
 import style from "./cart-item.module.scss";
 import { Title } from "@/components";
 import { cn } from "@/lib/utils";
 import { TCartItemUIProps } from "./type";
+import { X } from "lucide-react";
 
 export const CartItemUI: React.FC<TCartItemUIProps> = ({
   id,
@@ -16,8 +15,10 @@ export const CartItemUI: React.FC<TCartItemUIProps> = ({
   article,
   loading,
   price,
+  deleteItem,
   increment,
   decrement,
+
   size,
   count,
 }) => {
@@ -28,6 +29,10 @@ export const CartItemUI: React.FC<TCartItemUIProps> = ({
         style.card
       )}
     >
+      <Button className="absolute top-3 right-3 rounded-full w-[34px] h-[34px]  hover:opacity-70 z-10"
+      onClick={()=>{deleteItem(id)}}>
+        <X width={18} height={18} className="rounded-full" />
+      </Button>
       <div className="flex rounded-l-[20px] bg-secondary  w-[1100px] h-[321px] bg-cover bg-center">
         <Image
           className={"bg-cover rounded-l-[20px] bg-center w-full h-full"}

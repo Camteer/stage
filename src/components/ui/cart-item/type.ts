@@ -11,7 +11,7 @@ export interface TCartItemUIProps {
   article: number;
   increment: (data: { id: number; quantity: number }) => void;
   decrement: (data: { id: number; quantity: number }) => void;
-  delete: (id: number) => void;
+  deleteItem: (id: number) => void;
   className?: string;
 }
 

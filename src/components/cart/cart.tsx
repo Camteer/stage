@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "@/store/store";
 import {
   fetchCart,
   fetchChangeCartItemCountApi,
+  fetchDeleteCartItemCountApi,
   getCartItems,
   getIsLoading,
 } from "@/store/slices/cartSlice";
@@ -25,6 +26,9 @@ export const Cart: FC = ({}) => {
   const handelChange = (data: {id: number, quantity: number}) => {
     dispatch(fetchChangeCartItemCountApi(data))
   }
+  const handelDelete = (id: number) => {
+    dispatch(fetchDeleteCartItemCountApi(id))
+  }
   return (
     <Container className={cn("flex-col")}>
       <div className="flex flex-col gap-6">
@@ -41,7 +45,7 @@ export const Cart: FC = ({}) => {
             count={item.quantity}
             increment={handelChange}
             decrement={handelChange}
-            delete={() => {}}
+            deleteItem={handelDelete}
           ></CartItemUI>
         ))}
         {cartItems.totalAmount}
