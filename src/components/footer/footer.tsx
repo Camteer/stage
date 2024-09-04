@@ -3,6 +3,7 @@ import { FooterUI } from "../ui";
 import { Container } from "../container";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Mail, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -49,13 +50,12 @@ export const Footer = () => {
           </div>
           <div className="flex flex-col h-[60px] justify-between">
             <span className={cn("flex gap-3")}>
-              <Image
-                className={cn("w-auto h-auto")}
-                width={20}
-                height={20}
-                src={"/svg/phone.svg"}
-                alt={""}
-              />
+              <a
+                className={cn("no-underline text-[#B3C0D2")}
+                href="tel:+79519992834"
+              >
+                <Phone stroke="#29292D" fill="#B3C0D2" size={24} />
+              </a>
               <a
                 className={cn("no-underline text-[#B3C0D2")}
                 href="tel:+79519992834"
@@ -64,13 +64,11 @@ export const Footer = () => {
               </a>
             </span>
             <span className={cn("flex gap-3")}>
-              <Image
-                className={cn("w-auto h-auto")}
-                width={20}
-                height={20}
-                src={"/svg/email.svg"}
-                alt={""}
-              />
+              <a
+                className={cn("no-underline text-[#B3C0D2")}
+                href="tel:+79519992834"
+              ><Mail stroke="#29292D" fill="#B3C0D2" size={24} /></a>
+              
               <a
                 className={cn("no-underline text-[#B3C0D2")}
                 href="mailto:info@stageboxbrand.ru"

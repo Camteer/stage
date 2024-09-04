@@ -165,10 +165,7 @@ c77 0 147 -3 156 -6 20 -8 45 -56 45 -89 0 -22 4 -25 35 -25 35 0 35 1 35 43
         </svg>
       );
       break;
-    case "Puma":
-      return <></>;
-      break;
-    case "Newbalance":
+
       return (
         <svg
           version="1.0"
@@ -399,11 +396,15 @@ c77 0 147 -3 156 -6 20 -8 45 -56 45 -89 0 -22 4 -25 35 -25 35 0 35 1 35 43
         </svg>
       );
       break;
-    case "Reebook":
-      return <></>;
-      break;
+
     default:
-      return <></>;
+      return (
+        <div
+          className={cn(" text-center pt-[40%] font-extrabold text-[#8b8c8d] hover:text-[black] transition-colors")}
+        >
+          {type}
+        </div>
+      );
       break;
   }
 };

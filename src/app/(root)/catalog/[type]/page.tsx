@@ -2,7 +2,7 @@ import { Container } from "@/components";
 import Catalog from "@/components/catalog/catalog";
 import { redirect } from "next/navigation";
 
-export default function Home({
+export default function CatalogBrend({
   params,
 }: {
   params: { type: "sneakers" | "accessories" | "clothes" };

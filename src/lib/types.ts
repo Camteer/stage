@@ -41,7 +41,6 @@ export type TCard = {
   brandId: number;
   sale: boolean;
 
-
   StatusLike: boolean;
 
   season: TSeasons;
@@ -56,3 +55,18 @@ export type TCardResponse = {
   data: TCard[];
   total: number;
 };
+
+import { Cart, CartItem, Product } from "@prisma/client";
+
+export type CartItemDTO = CartItem & {
+  productItem: Product 
+};
+
+export interface CartDTO extends Cart {
+  items: CartItemDTO[];
+}
+
+export interface CreateCartItemValues {
+  productItemId: number;
+  size: number;
+}

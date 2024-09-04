@@ -9,7 +9,6 @@ import { Heart } from "lucide-react";
 import style from "./product.module.scss";
 import Link from "next/link";
 import { TProductUIProps } from "./type";
-
 export const ProductUI: FC<TProductUIProps> = ({
   title,
   article,
@@ -25,6 +24,7 @@ export const ProductUI: FC<TProductUIProps> = ({
   about,
 }) => {
   const [stateActiveNav, setStateActiveNav] = useState("Описание");
+  const allSizes = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
   return (
     <>
       <div>
@@ -34,9 +34,7 @@ export const ProductUI: FC<TProductUIProps> = ({
             Артикул {article}
           </p>
         </div>
-        <div
-          className={cn("mt-4 flex w-full justify-between  min-w-[1110px]")}
-        >
+        <div className={cn("mt-4 flex w-full justify-between  min-w-[1110px]")}>
           <div className="w-[729px] relative">
             <Image
               height={540}
@@ -85,10 +83,11 @@ export const ProductUI: FC<TProductUIProps> = ({
                   className="w-[265px] font-black text-[24px] leading-[29.26px] mt-5"
                 ></Title>
                 <div className="flex flex-wrap gap-x-[20px] gap-y-[20px] w-[385px] m-5 relative">
-                  {sizes.map((item, index) => (
+                  {allSizes.map((item, index) => (
                     <Button
                       variant={"size"}
                       key={index}
+                      disabled={sizes.includes(item) ? false : true}
                       children={`${item} EUR`}
                       className={cn(
                         "text-[#002C6A] font-bold w-20 text-[18px] leading-[21.94px] text-center",

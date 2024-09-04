@@ -11,6 +11,11 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import { Card } from "../card";
+import { useDispatch, useSelector } from "@/store/store";
+import {
+  fetchProductsCarosel,
+  getProductCarousel,
+} from "@/store/slices/productSlice";
 
 export const CarouselBetter = () => {
   const cardData = [
@@ -175,6 +180,11 @@ export const CarouselBetter = () => {
       sale: false,
     },
   ];
+  const cards = useSelector(getProductCarousel);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProductsCarosel("take=20&page=2"));
+  }, []);
 
   const [current, setCurrent] = useState(0);
 
@@ -182,8 +192,8 @@ export const CarouselBetter = () => {
 
   const chunkedData = [];
 
-  for (let i = 0; i < cardData.length; i += 4) {
-    chunkedData.push(cardData.slice(i, i + 4));
+  for (let i = 0; i < cards.length; i += 4) {
+    chunkedData.push(cards.slice(i, i + 4));
   }
 
   return (
@@ -207,23 +217,31 @@ export const CarouselBetter = () => {
                 key={index}
                 className="flex justify-between pt-[107px] pl-[120px] pr-[100px]"
               >
-                {item.map((card, _) => (
+                {item.map((card, index) => (
                   <Card
-                    key={card._id}
-                    imageUrl={card.imageUrl}
-                    title={card.title}
-                    article={card.article}
+                    key={index}
+                    imageUrl={card.image[0]}
+                    title={card.name}
+                    article={12345}
                     price={card.price}
                     size={card.size}
-                    StatusLike={card.StatusLike}
+                    StatusLike={false}
                     id={card.id}
                   />
                 ))}
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious
+            onClickCapture={() => {
+              setCurrent((prev) => prev - 1);
+            }}
+          />
+          <CarouselNext
+            onClickCapture={() => {
+              setCurrent((prev) => prev + 1);
+            }}
+          />
         </Carousel>
         <div className="flex justify-center gap-[85px] ">
           {chunkedData.map((_, index) => (
