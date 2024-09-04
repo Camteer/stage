@@ -14,7 +14,10 @@ export const CartItemUI: React.FC<TCartItemUIProps> = ({
   imageUrl,
   title,
   article,
+  loading,
   price,
+  increment,
+  decrement,
   size,
   count,
 }) => {
@@ -60,13 +63,21 @@ export const CartItemUI: React.FC<TCartItemUIProps> = ({
               )}
             >
               <Button
-                disabled
-                className="w-[44px] bg-[#FF1818] text-[white] hover:bg-[#FF4218] hover:text-[white] disabled:text-[#e4dfdf] disabled:bg-[white] disabled:opacity-100"
+                disabled={count == 1 ? true : false}
+                className="w-[44px] bg-[#FF1818] text-[white] hover:bg-[#913420] hover:text-[white] disabled:text-[#e4dfdf] disabled:bg-[white] disabled:opacity-100"
+                onClick={() => {
+                  if (!loading) decrement({ id, quantity: -1 });
+                }}
               >
                 -
               </Button>
               <p>{count}</p>
-              <Button className="w-[44px] bg-[#FF1818] text-[white] hover:bg-[#FF4218] hover:text-[white] disabled:text-[#e4dfdf] disabled:bg-[white] disabled:opacity-100">
+              <Button
+                onClick={() => {
+                  increment({ id, quantity: 1 });
+                }}
+                className="w-[44px] bg-[#FF1818] text-[white] hover:bg-[#913420] hover:text-[white] disabled:text-[#e4dfdf] disabled:bg-[white] disabled:opacity-100"
+              >
                 +
               </Button>
             </div>

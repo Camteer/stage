@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
-
-import { CreateCartItemValues } from "../../../lib/types";
 import { updateCartTotalAmount } from "../../../lib/update-cart-total-amount";
 import { prisma } from "../../../../prisma/prisma-client";
 

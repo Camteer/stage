@@ -9,54 +9,37 @@ import {
   getProductId,
   getProducts,
 } from "@/store/slices/productSlice";
-import { TProductUIProps } from "../ui/product/type";
+
 import { useParams } from "next/navigation";
+import { fetchCartAdd } from "@/store/slices/cartSlice";
+import { CreateCartItemValues } from "@/lib/types";
 
 export const Product: FC = () => {
+
   
-  const product = useSelector(getProductId)
+  const product = useSelector(getProductId);
   const { id } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductId(Number(id)));
   }, []);
-  console.log(product)
-  const productData: TProductUIProps = {
-    title: "Кросовки Nike Air Presto",
-    article: 19666,
+  console.log(product);
 
-    images: [
-      "https://dummyimage.com/600x400/cc0ecc/00ff95",
-      "https://dummyimage.com/600x400/cc0ecc/00ff95",
-      "https://dummyimage.com/600x400/cc0ecc/00ff95",
-      "https://dummyimage.com/600x400/cc0ecc/00ff95",
-    ],
-    prise: 3490,
-    sizes: [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51],
-    categories: "Спортивный стиль",
-    model: "Air Presto",
-    season: "Лето",
-    color: "Разноцветный",
-    description: `Кроссовки Nike Air Presto – обувь, которая создана с учетом максимальной вентиляции стопы и комфорта при ношении и занятиях спортом. Верхняя часть кроссовок изготовлена из материала, который обеспечивает идеальный микроклимат внутри обуви и комфорт при ношении. Подошва эластичная и в пяточной части имеет вставки «Air Sole» для лучшей амортизации. Глубокий рельеф протектора обеспечивает мягкость хода и удобство при ношении. Для фиксации стопы предусмотрена шнуровка через специальный каркас, который при затягивании образует жесткую и эластичную конструкцию.
-- Комфортный микроклимат
-- Легкий вес
-- Амортизация стопы`,
-    about: `Кроссовки Nike Air Presto – обувь, которая создана с учетом максимальной вентиляции стопы и комфорта при ношении и занятиях спортом. Верхняя часть кроссовок изготовлена из материала, который обеспечивает идеальный микроклимат внутри обуви и комфорт при ношении. Подошва эластичная и в пяточной части имеет вставки «Air Sole» для лучшей амортизации. Глубокий рельеф протектора обеспечивает мягкость хода и удобство при ношении. Для фиксации стопы предусмотрена шнуровка через специальный каркас, который при затягивании образует жесткую и эластичную конструкцию.
-- Комфортный микроклимат
-- Легкий вес
-- Амортизация стопы`,
-  };
-  const sizes: number[] = []
-  product.size.forEach(item => {
-    sizes.push(item.name)
-  })
-
+  const sizes: number[] = [];
+  product.size.forEach((item) => {
+    sizes.push(item.name);
+  });
+  const handelAddItem = (data: CreateCartItemValues) => {
+    dispatch(fetchCartAdd(data))
+  }
   return (
     <>
       <Container className="">
         <ProductUI
+          id={Number(id)}
           title={product.name}
           article={12345}
+          addItem={handelAddItem}
           images={product.image}
           prise={product.price}
           sizes={sizes}

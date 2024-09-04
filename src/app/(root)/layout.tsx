@@ -1,7 +1,5 @@
 import { AppHeader, Categories, Footer } from "@/components";
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
-
 
 export default function HomeLayout({
   children,

@@ -59,7 +59,7 @@ export type TCardResponse = {
 import { Cart, CartItem, Product } from "@prisma/client";
 
 export type CartItemDTO = CartItem & {
-  productItem: Product 
+  productItem: Product;
 };
 
 export interface CartDTO extends Cart {
@@ -69,4 +69,13 @@ export interface CartDTO extends Cart {
 export interface CreateCartItemValues {
   productItemId: number;
   size: number;
+}
+
+
+
+export interface CartUI {
+  id: number | null;
+  userId: number | null;
+  totalAmount: number;
+  items: CartItemDTO[]
 }

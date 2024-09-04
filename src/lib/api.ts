@@ -1,4 +1,10 @@
-import { TCard, TCardResponse, TFiltersResponse } from "./types";
+import {
+  CartUI,
+  CreateCartItemValues,
+  TCard,
+  TCardResponse,
+  TFiltersResponse,
+} from "./types";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
 
@@ -19,10 +25,42 @@ export const getProductsApi = (query: string = "") =>
       return data;
     });
 
-export const getProductIdApi = (id: number ) => 
+export const getProductIdApi = (id: number) =>
   fetch(`${url}/products/${id}`)
     .then((res) => checkResponse<TCard>(res))
     .then((data) => {
       return data;
     });
-;
+
+export const getCartApi = () =>
+  fetch(`${url}/cart`)
+    .then((res) => checkResponse<CartUI>(res))
+    .then((data) => {
+      return data;
+    });
+
+export const CartItemApi = (data: CreateCartItemValues) => 
+  fetch(`${url}/cart`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => checkResponse<CartUI>(res))
+    .then((data) => {
+      return data;
+    });
+
+export const changeCartItemCountApi = ({id, quantity}: {id: number, quantity: number}) => 
+  fetch(`${url}/cart/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({quantity}),
+  })
+    .then((res) => checkResponse<CartUI>(res))
+    .then((data) => {
+      return data;
+    });

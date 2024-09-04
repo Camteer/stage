@@ -12,21 +12,21 @@ import {
 import { BrandsSvgUI } from "../ui/brands/brands";
 import { Container } from "../container";
 import { Title } from "../title";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "@/store/store";
 import { fetchBrands, getBrands } from "@/store/slices/filtersSlice";
 
 export function Brands() {
   const brands: string[] = [];
-  const brandsData = useSelector(getBrands)
-  brandsData.forEach((item => {
-    brands.push(item.name)
-  }))
-  console.log(brands)
-  const dispatch = useDispatch()
-  React.useEffect(()=> {
-    dispatch(fetchBrands())
-  }, [])
+  const brandsData = useSelector(getBrands);
+  brandsData.forEach((item) => {
+    brands.push(item.name);
+  });
+
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(fetchBrands());
+  }, []);
   const router = useRouter();
   return (
     <Container className="max-w-[1320px] flex-col">

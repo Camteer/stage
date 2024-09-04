@@ -7,10 +7,12 @@ import {
 } from "react-redux";
 import { filtersSliceReducer } from "./slices/filtersSlice";
 import { productsSliceReducer } from "./slices/productSlice";
+import { cartSliceReducer } from "./slices/cartSlice";
 
 export const rootReducer = combineReducers({
   filters: filtersSliceReducer,
   products: productsSliceReducer,
+  cart: cartSliceReducer,
 });
 
 const store = configureStore({

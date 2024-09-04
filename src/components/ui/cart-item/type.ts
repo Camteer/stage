@@ -4,12 +4,14 @@ export interface TCartItemUIProps {
   id: number;
   imageUrl: string;
   title: string;
-  count: number
+  count: number;
   price: number;
   size: number;
-
+  loading: boolean;
   article: number;
-
+  increment: (data: { id: number; quantity: number }) => void;
+  decrement: (data: { id: number; quantity: number }) => void;
+  delete: (id: number) => void;
   className?: string;
 }
 

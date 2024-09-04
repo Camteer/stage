@@ -1,6 +1,7 @@
-import { TSizes, TTypes } from "@/lib/types";
+import { CreateCartItemValues} from "@/lib/types";
 
 export type TProductUIProps = {
+    id: number;
     title: string;
     article: number;
     images: string[];
@@ -11,5 +12,6 @@ export type TProductUIProps = {
     season: string;
     color: string;
     description: string;
+    addItem: (data: CreateCartItemValues) => void;
     about: string;
 }
