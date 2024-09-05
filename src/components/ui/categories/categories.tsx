@@ -66,7 +66,7 @@ export const CategoriesUI: FC = () => {
           <div className="flex w-full max-w-sm ">
             <Input
               className={
-                "hover:border-black transition-hover focus:border-black ease-in-out"
+                "hover:border-black transition-hover focus:border-black ease-in-out border"
               }
               type=""
               placeholder="Поиск"

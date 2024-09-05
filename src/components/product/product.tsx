@@ -22,6 +22,7 @@ export const Product: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductId(Number(id)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(product);
 

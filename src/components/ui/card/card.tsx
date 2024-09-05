@@ -32,13 +32,14 @@ export const CardUI: React.FC<TCardUIProps> = ({
     >
       <div className="flex justify-center  rounded-t-[20px] bg-secondary  h-[188px] bg-cover bg-center">
         <Link href={`/products/${id}`}>
-        <Image
-          className={"bg-cover rounded-t-[20px] bg-center w-full h-full"}
-          width={256}
-          height={190}
-          src={imageUrl}
-          alt={`${title}`}
-        /></Link>
+          <Image
+            className={"bg-cover rounded-t-[20px] bg-center w-full h-full"}
+            width={256}
+            height={190}
+            src={imageUrl}
+            alt={`${title}`}
+          />
+        </Link>
       </div>
 
       <div className="pt-[20px] relative  pr-[26px]  pl-[24px]">
@@ -70,9 +71,8 @@ export const CardUI: React.FC<TCardUIProps> = ({
               <Button
                 variant={"size"}
                 key={index}
-                children={`${item.name} EUR`}
                 className={cn("", style.size)}
-              />
+              >{`${item.name} EUR`}</Button>
             ))}
           </div>
         </div>

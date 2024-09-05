@@ -27,7 +27,7 @@ export const ProductUI: FC<TProductUIProps> = ({
 }) => {
   const [selectedSize, setSize] = useState(0);
   console.log(selectedSize);
-  const router = useRouter()
+  const router = useRouter();
   const [stateActiveNav, setStateActiveNav] = useState("Описание");
   const allSizes = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
   return (
@@ -96,7 +96,6 @@ export const ProductUI: FC<TProductUIProps> = ({
                       }}
                       key={index}
                       disabled={sizes.includes(item) ? false : true}
-                      children={`${item} EUR`}
                       className={cn(
                         "text-[#002C6A] font-bold w-20 text-[18px] leading-[21.94px] text-center",
                         style.size,
@@ -104,7 +103,10 @@ export const ProductUI: FC<TProductUIProps> = ({
                           selectedSize == item ? "bg-[#ff1818] text-white" : ""
                         }`
                       )}
-                    />
+                    >
+                      {" "}
+                      children={`${item} EUR`}
+                    </Button>
                   ))}
                 </div>
                 <span className="absolute bottom-[-33px] w-[324px] h-[65px] rounded-full text-center flex justify-center items-center bg-white border-[1px] border-solid border-black">
@@ -120,19 +122,21 @@ export const ProductUI: FC<TProductUIProps> = ({
             <div className="  flex flex-col gap-5">
               <Button
                 className="h-[56px] w-[296px] rounded-[50px] bg-[red] text-white text-[18px] font-bold landing-[21px] "
-                disabled={selectedSize? false: true}
+                disabled={selectedSize ? false : true}
                 onClick={() => {
                   addItem({ productItemId: id, size: selectedSize });
                 }}
               >
                 В корзину
               </Button>
-              <Button className="h-[56px]   w-[296px] rounded-[50px] bg-[#002C6A] text-white text-[18px] font-bold landing-[21px] "
-              disabled={selectedSize? false: true}
-              onClick={() => {
-                addItem({ productItemId: id, size: selectedSize });
-                router.replace('/cart')
-              }}>
+              <Button
+                className="h-[56px]   w-[296px] rounded-[50px] bg-[#002C6A] text-white text-[18px] font-bold landing-[21px] "
+                disabled={selectedSize ? false : true}
+                onClick={() => {
+                  addItem({ productItemId: id, size: selectedSize });
+                  router.replace("/cart");
+                }}
+              >
                 Купить сейчас
               </Button>
             </div>

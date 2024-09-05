@@ -21,7 +21,6 @@ import { useFilters } from "@/hooks/use-filters";
 import { useQuery, useQueryFilters } from "@/hooks/use-query";
 import { fetchProducts } from "@/store/slices/productSlice";
 
-
 interface IPriceProps {
   priceFrom: number;
   priceTo: number;
@@ -35,6 +34,7 @@ export const FilterUI: FC<{
   const loading = useSelector(getIsLoading);
   useEffect(() => {
     dispatch(fetchFilters());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchParams = useSearchParams();
@@ -48,8 +48,9 @@ export const FilterUI: FC<{
     filters.setPrices("priceTo", prices[1]);
   };
 
+  const f = useQuery(filters)
   const handleFilters = () => {
-    dispatch(fetchProducts(useQuery(filters)));
+    dispatch(fetchProducts(f));
   };
 
   return (
@@ -161,6 +162,7 @@ export const FilterUI: FC<{
           disabled={searchParams.size ? false : true}
           onClick={() => {
             filters.clearFilters();
+            dispatch(fetchProducts())
           }}
           className="h-[56px] rounded-[50px] bg-[red] text-white text-[18px] font-bold landing-[21px] disabled:bg-[#B3C0D2]"
         >

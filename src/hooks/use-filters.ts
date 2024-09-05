@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
 import { useSet } from "react-use";
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 
 interface PriceProps {
   priceFrom?: number;
@@ -103,13 +103,15 @@ export const useFilters = (): ReturnProps => {
     take: Number(searchParams.get("take")) || undefined,
   });
 
-  const updatePrice = (name: keyof PriceProps, value: number | undefined) => {
-    setPrices((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-  };
+  const updatePrice = useCallback(
+    (name: keyof PriceProps, value: number | undefined) => {
+      setPrices((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    []
+  );
 
   const clearFilters = () => {
     clearSale();
@@ -123,7 +125,7 @@ export const useFilters = (): ReturnProps => {
     updatePrice("priceTo", undefined);
   };
 
-  return React.useMemo(
+  return useMemo(
     () => ({
       sizes,
       season,
@@ -143,6 +145,6 @@ export const useFilters = (): ReturnProps => {
       setType: toggleType,
       clearFilters,
     }),
-    [sizes, season, colors, type, brands, sale, prices]
+    [take, sizes, season, colors, type, brands, sale, prices]
   );
 };

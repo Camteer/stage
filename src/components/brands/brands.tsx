@@ -15,6 +15,7 @@ import { Title } from "../title";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "@/store/store";
 import { fetchBrands, getBrands } from "@/store/slices/filtersSlice";
+import { useEffect } from "react";
 
 export function Brands() {
   const brands: string[] = [];
@@ -24,8 +25,9 @@ export function Brands() {
   });
 
   const dispatch = useDispatch();
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchBrands());
+    
   }, []);
   const router = useRouter();
   return (

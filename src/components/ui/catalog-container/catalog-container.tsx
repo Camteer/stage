@@ -22,7 +22,7 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
   loading,
   size,
 }) => {
-  size = size ? size : 18
+  size = size ? size : 18;
   return (
     <div className={cn(``, style.Container, className)}>
       <div className="flex justify-between ">
@@ -92,17 +92,18 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
         )}
       >
         {loading
-          ? Array(size).fill(0).map((_, index) => (
-              <Skeleton
-                key={index}
-                className={cn(
-                  "rounded-[20px] w-[255px] min-h-[325px] relative shadow"
-                )}
-              >
-                {" "}
-                
-              </Skeleton>
-            ))
+          ? Array(size)
+              .fill(0)
+              .map((_, index) => (
+                <Skeleton
+                  key={index}
+                  className={cn(
+                    "rounded-[20px] w-[255px] min-h-[325px] relative shadow"
+                  )}
+                >
+                  {" "}
+                </Skeleton>
+              ))
           : children}
       </div>
       <Pagination className="mt-[100px]">
@@ -114,7 +115,7 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
             <PaginationEllipsis />
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink children="1" />
+            <PaginationLink>1</PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationEllipsis />

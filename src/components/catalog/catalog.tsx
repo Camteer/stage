@@ -3,8 +3,12 @@
 import { CataloContainerUI, FilterUI } from "@/components/ui";
 import { Card } from "../card";
 import { useDispatch, useSelector } from "@/store/store";
-import { fetchProducts, getIsLoading, getProducts } from "@/store/slices/productSlice";
-import { useEffect } from "react";
+import {
+  fetchProducts,
+  getIsLoading,
+  getProducts,
+} from "@/store/slices/productSlice";
+import { Suspense, useEffect } from "react";
 import { useFilters } from "@/hooks/use-filters";
 import { useQuery, useQueryFilters } from "@/hooks/use-query";
 
@@ -15,13 +19,14 @@ export default function Catalog({
 }) {
   const dispatch = useDispatch();
   const cards = useSelector(getProducts);
-  const loading = useSelector(getIsLoading)
+  const loading = useSelector(getIsLoading);
   const filters = useFilters();
 
   useQueryFilters(filters);
-
+  const f = useQuery(filters);
   useEffect(() => {
-    dispatch(fetchProducts(useQuery(filters)));
+    dispatch(fetchProducts(f));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.prices.take]);
 
   const handleTake = (value: number) => {
@@ -31,8 +36,14 @@ export default function Catalog({
   return (
     <>
       <div className="flex gap-20 w-full">
-        <FilterUI type={type}></FilterUI>
-        <CataloContainerUI onClickSize={handleTake} size={filters.prices.take} loading={loading}>
+        <Suspense>
+          <FilterUI type={type}></FilterUI>
+        </Suspense>
+        <CataloContainerUI
+          onClickSize={handleTake}
+          size={filters.prices.take}
+          loading={loading}
+        >
           {cards.map((card, index) => (
             <Card
               key={index}

@@ -184,6 +184,7 @@ export const CarouselBetter = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchProductsCarosel("take=20&page=2"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [current, setCurrent] = useState(0);
