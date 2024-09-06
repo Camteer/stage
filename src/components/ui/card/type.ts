@@ -18,8 +18,9 @@ export interface TCardUIProps {
   StatusLike: boolean;
   showSizes?: boolean;
   className?: string;
-  OnMouseEnter?: () => void;
-  OnMouseLeave?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  onSizeEnter?: (size: string | number) => void
 }
 
 

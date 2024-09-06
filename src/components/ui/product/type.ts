@@ -14,4 +14,5 @@ export type TProductUIProps = {
     description: string;
     addItem: (data: CreateCartItemValues) => void;
     about: string;
+    loading: boolean
 }

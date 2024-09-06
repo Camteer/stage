@@ -14,20 +14,22 @@ import { Container } from "../container";
 import { Title } from "../title";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "@/store/store";
-import { fetchBrands, getBrands } from "@/store/slices/filtersSlice";
+import {
+  fetchBrands,
+  getBrands,
+  getBrandsLoading,
+} from "@/store/slices/filtersSlice";
 import { useEffect } from "react";
+import { Skeleton } from "../ui/skeleton";
+import { cn } from "@/lib/utils";
 
 export function Brands() {
-  const brands: string[] = [];
   const brandsData = useSelector(getBrands);
-  brandsData.forEach((item) => {
-    brands.push(item.name);
-  });
+  const loading = useSelector(getBrandsLoading);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBrands());
-    
   }, []);
   const router = useRouter();
   return (
@@ -35,17 +37,28 @@ export function Brands() {
       <Title title="Бренды" weight="900" className="pl-[105px] mb-11" />
       <Carousel className="w-full pr-[120px] pl-[120px] mb-5">
         <CarouselContent className="max-w-[1110px] px-3 ">
-          {brands.map((type, index) => (
-            <CarouselItem
-              key={index}
-              onClick={() => {
-                router.replace(`/catalog/sneakers?brands=${index + 1}`);
-              }}
-              className="pl-1 md:basis-[20%] lg:basis-[20%] cursor-pointer"
-            >
-              <BrandsSvgUI type={type}></BrandsSvgUI>
-            </CarouselItem>
-          ))}
+          {loading
+            ? Array(9)
+                .fill(0)
+                .map((_, key) => (
+                  <CarouselItem
+                    key={key}
+                    className="pl-1 md:basis-[20%] lg:basis-[20%] cursor-pointer"
+                  >
+                    <Skeleton key={key} className={cn("w-[190px] h-[190px]")}></Skeleton>
+                  </CarouselItem>
+                ))
+            : brandsData.map((type, index) => (
+                <CarouselItem
+                  key={index}
+                  onClick={() => {
+                    router.replace(`/catalog/sneakers?brands=${index + 1}`);
+                  }}
+                  className="pl-1 md:basis-[20%] lg:basis-[20%] cursor-pointer"
+                >
+                  <BrandsSvgUI type={type.name}></BrandsSvgUI>
+                </CarouselItem>
+              ))}
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />

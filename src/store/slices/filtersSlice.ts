@@ -7,6 +7,7 @@ export const FILTERS_SLICES_NAME = "filters";
 interface IFilters {
   filters: TFiltersResponse;
   isLoading: boolean;
+  brandsLoading: boolean;
   brands: TBrands[];
   error: string | null;
 }
@@ -22,6 +23,7 @@ const initialState: IFilters = {
     colors: [],
     seasons: [],
   },
+  brandsLoading: false
 };
 
 export const fetchFilters = createAsyncThunk(
@@ -42,6 +44,7 @@ const filtersSlice = createSlice({
     getFilters: (state) => state.filters,
     getIsLoading: (state) => state.isLoading,
     getBrands: (state) => state.brands,
+    getBrandsLoading: (state) => state.brandsLoading
   },
   extraReducers: (builder) => {
     builder
@@ -58,19 +61,19 @@ const filtersSlice = createSlice({
         state.error = "Не удалось получить filters";
       })
       .addCase(fetchBrands.pending, (state) => {
-        state.isLoading = true;
+        state.brandsLoading = true;
         state.error = null;
       })
       .addCase(fetchBrands.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.brandsLoading = false;
         state.brands = action.payload.brands;
       })
       .addCase(fetchBrands.rejected, (state) => {
-        state.isLoading = false;
+        state.brandsLoading = false;
         state.error = "Не удалось получить filters";
       });
   },
 });
 
 export const filtersSliceReducer = filtersSlice.reducer;
-export const { getFilters, getIsLoading, getBrands } = filtersSlice.selectors;
+export const { getFilters, getIsLoading, getBrands, getBrandsLoading } = filtersSlice.selectors;
