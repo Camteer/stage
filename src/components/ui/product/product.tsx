@@ -9,7 +9,8 @@ import { Heart } from "lucide-react";
 import style from "./product.module.scss";
 import Link from "next/link";
 import { TProductUIProps } from "./type";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Skeleton } from "../skeleton";
 export const ProductUI: FC<TProductUIProps> = ({
   title,
   id,
@@ -24,9 +25,16 @@ export const ProductUI: FC<TProductUIProps> = ({
   color,
   description,
   about,
+  loading,
 }) => {
-  const [selectedSize, setSize] = useState(0);
-  console.log(selectedSize);
+  const query = useSearchParams();
+
+  const [selectedSize, setSize] = useState(
+    query.has("size") && sizes.includes(Number(query.get("size")))
+      ? Number(query.get("size"))
+      : 0
+  );
+  
   const router = useRouter();
   const [stateActiveNav, setStateActiveNav] = useState("Описание");
   const allSizes = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
@@ -40,30 +48,35 @@ export const ProductUI: FC<TProductUIProps> = ({
           </p>
         </div>
         <div className={cn("mt-4 flex w-full justify-between  min-w-[1110px]")}>
-          <div className="w-[729px] relative">
-            <Image
-              height={540}
-              width={729}
-              className={cn("rounded-[20px]")}
-              src={images[0]}
-              alt={"imagePre"}
-            ></Image>
-            <span className="absolute top-[15px] right-[15px] ">
-              <Heart size={45} className={cn("", style.heart)} />
-            </span>
-            <div className={cn("flex w-full justify-between mt-5")}>
-              {images.slice(1).map((image, index) => (
-                <Image
-                  key={index}
-                  height={118}
-                  width={160}
-                  src={image}
-                  className={cn("rounded-[20px]")}
-                  alt={"imagePre "}
-                ></Image>
-              ))}
+          {loading ? (
+            <Skeleton className="w-[729px] h-[613px]"></Skeleton>
+          ) : (
+            <div className="w-[729px] relative">
+              <Image
+                height={540}
+                width={729}
+                className={cn("rounded-[20px]")}
+                src={images[0]}
+                alt={"imagePre"}
+              ></Image>
+              <span className="absolute top-[15px] right-[15px] ">
+                <Heart size={45} className={cn("", style.heart)} />
+              </span>
+              <div className={cn("flex w-full justify-between mt-5")}>
+                {images.slice(1).map((image, index) => (
+                  <Image
+                    key={index}
+                    height={118}
+                    width={160}
+                    src={image}
+                    className={cn("rounded-[20px]")}
+                    alt={"imagePre "}
+                  ></Image>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
           <div
             className={cn(
               "w-[481px] flex flex-col justify-between items-center"
@@ -104,8 +117,7 @@ export const ProductUI: FC<TProductUIProps> = ({
                         }`
                       )}
                     >
-                      {" "}
-                      children={`${item} EUR`}
+                      {`${item} EUR`}
                     </Button>
                   ))}
                 </div>

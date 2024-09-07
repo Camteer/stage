@@ -17,13 +17,14 @@ export const CardUI: React.FC<TCardUIProps> = ({
   price,
   size,
   showSizes,
-  OnMouseEnter,
-  OnMouseLeave,
+  onMouseEnter,
+  onMouseLeave,
+  onSizeEnter
 }) => {
   return (
     <div
-      onMouseLeave={OnMouseLeave}
-      onMouseEnter={OnMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onMouseEnter={onMouseEnter}
       className={cn(
         "rounded-[20px] w-[255px] min-h-[325px] relative bg-white shadow",
         style.card,
@@ -70,6 +71,7 @@ export const CardUI: React.FC<TCardUIProps> = ({
             {size.map((item, index) => (
               <Button
                 variant={"size"}
+                onClick={()=>{onSizeEnter? onSizeEnter(item.name): undefined}}
                 key={index}
                 className={cn("", style.size)}
               >{`${item.name} EUR`}</Button>
