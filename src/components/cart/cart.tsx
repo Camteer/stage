@@ -21,7 +21,6 @@ import { createOrder } from "@/app/actions";
 import { Skeleton } from "../ui/skeleton";
 
 export const Cart: FC = ({}) => {
-  const [submitting, setSubmitting] = React.useState(false);
   const dispatch = useDispatch();
   const cartItems = useSelector(getCartItems);
   const loading = useSelector(getIsLoading);
@@ -46,7 +45,6 @@ export const Cart: FC = ({}) => {
       surname: "",
       email: "",
       phone: "",
-
       region: "",
       locality: "",
       street: "",
@@ -59,33 +57,35 @@ export const Cart: FC = ({}) => {
   });
 
   const onSubmit = async (data: CheckoutFormValues) => {
-    console.log(data)
+    try {
+      const url = await createOrder(data);
+
+      if (url) {
+        location.href = url;
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <Container className={cn("flex-col")}>
       <div className="flex flex-col gap-6">
-        {loading
-          ? Array(2)
-              .fill(0)
-              .map((_, key) => (
-                <Skeleton key={key} className="w-[1110px] h-[310px] rounded-[20px]"></Skeleton>
-              ))
-          : cartItems.items?.map((item) => (
-              <CartItemUI
-                key={item.productItem.id}
-                id={item.id}
-                loading={loading}
-                imageUrl={item.productItem.image[0]}
-                title={item.productItem.name}
-                price={item.productItem.price}
-                size={item.size ? item.size : 1}
-                article={12345}
-                count={item.quantity}
-                increment={handelChange}
-                decrement={handelChange}
-                deleteItem={handelDelete}
-              ></CartItemUI>
-            ))}
+        {cartItems.items?.map((item) => (
+          <CartItemUI
+            key={item.productItem.id}
+            id={item.id}
+            loading={loading}
+            imageUrl={item.productItem.image[0]}
+            title={item.productItem.name}
+            price={item.productItem.price}
+            size={item.size ? item.size : 1}
+            article={12345}
+            count={item.quantity}
+            increment={handelChange}
+            decrement={handelChange}
+            deleteItem={handelDelete}
+          ></CartItemUI>
+        ))}
         <span
           className={cn(
             "text-[48px] leading-[54.5px] font-normal mt-10 flex justify-between"
@@ -108,8 +108,8 @@ export const Cart: FC = ({}) => {
               </div>
             </div>
             <Button
+              disabled={cartItems.items.length == 0 ? true : false}
               type="submit"
-              
               className="w-full h-14 rounded-2xl mt-10 text-base font-bold "
             >
               Перейти к оплате

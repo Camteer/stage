@@ -131,10 +131,49 @@ export async function GET(req: NextRequest) {
       type: { select: { id: true, name: true } },
       category: { select: { id: true, name: true } },
       color: { select: { id: true, name: true } },
+      
     },
     take: take,
     skip: page && take ? (page - 1) * take : 0,
+    
+    
+  });
+  
+  const count = await prisma.product.count({
+    where: {
+      sale: sale,
+      price,
+      ...(seasonFilters.length > 0 && {
+        seasonId: { in: seasonFilters },
+      }),
+      ...(brandFilters.length > 0 && {
+        brandId: { in: brandFilters },
+      }),
+      ...(sizeFilters.length > 0 && {
+        size: {
+          some: {
+            OR: sizeFilters,
+          },
+        },
+      }),
+      ...(colorFilters.length > 0 && {
+        color: {
+          some: {
+            OR: colorFilters,
+          },
+        },
+      }),
+      ...(typeFilters.length > 0 && {
+        type: {
+          some: {
+            OR: typeFilters,
+          },
+        },
+      }),
+    },
+   
+    
   });
 
-  return NextResponse.json(product);
+  return NextResponse.json({product, count});
 }

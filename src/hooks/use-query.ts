@@ -11,7 +11,7 @@ export const useQueryFilters = (filters: Filters) => {
     if (isMounted.current) {
       const params = {
         ...filters.prices,
-        
+        ...filters.take,
         brands: Array.from(filters.brands),
         sizes: Array.from(filters.sizes),
         colors: Array.from(filters.colors),
@@ -37,7 +37,7 @@ export const useQueryFilters = (filters: Filters) => {
 export const useQuery = (filters: Filters) => {
   const params = {
     ...filters.prices,
-
+    ...filters.take,
     brands: Array.from(filters.brands),
     sizes: Array.from(filters.sizes),
     colors: Array.from(filters.colors),

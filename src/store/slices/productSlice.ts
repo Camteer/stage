@@ -11,12 +11,14 @@ interface IProducts {
   isLoading: boolean;
   error: string | null;
   productId: TCard;
+  total: number;
 }
 
 const initialState: IProducts = {
   isLoading: false,
   error: null,
   products: [],
+  total: 0,
   productId: {
     id: 0,
     image: [],
@@ -30,18 +32,18 @@ const initialState: IProducts = {
     StatusLike: false,
     season: {
       id: 0,
-      name: ""
+      name: "",
     },
     size: [],
     brand: {
       id: 0,
-      name: ""
+      name: "",
     },
     type: [],
     color: [],
-    categories: 1
+    categories: 1,
   },
-  productsCarousel: []
+  productsCarousel: [],
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -67,7 +69,8 @@ const productsSlice = createSlice({
     getProducts: (state) => state.products,
     getIsLoading: (state) => state.isLoading,
     getProductId: (state) => state.productId,
-    getProductCarousel: (state) => state.productsCarousel
+    getProductCarousel: (state) => state.productsCarousel,
+    getTotal: (state) => state.total,
   },
   extraReducers: (builder) => {
     builder
@@ -77,7 +80,8 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.products = action.payload;
+        state.products = action.payload.product;
+        state.total = action.payload.count;
       })
       .addCase(fetchProducts.rejected, (state) => {
         state.isLoading = false;
@@ -101,7 +105,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductsCarosel.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.productsCarousel = action.payload;
+        state.productsCarousel = action.payload.product;
       })
       .addCase(fetchProductsCarosel.rejected, (state) => {
         state.isLoading = false;
@@ -111,5 +115,10 @@ const productsSlice = createSlice({
 });
 
 export const productsSliceReducer = productsSlice.reducer;
-export const { getProducts, getIsLoading, getProductId, getProductCarousel } =
-  productsSlice.selectors;
+export const {
+  getProducts,
+  getIsLoading,
+  getProductId,
+  getProductCarousel,
+  getTotal,
+} = productsSlice.selectors;

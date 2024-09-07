@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { OrderStatus } from "@prisma/client";
 import { sendEmail } from "@/lib/send-email";
 import { PayOrderTemplate } from "@/components/send-email/pay-order";
+import { createPayment } from "@/lib/create-payment";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
@@ -31,32 +32,48 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    /* Если корзина не найдена возращаем ошибку */
     if (!userCart) {
       throw new Error("Cart not found");
     }
 
-    /* Если корзина пустая возращаем ошибку */
     if (userCart?.totalAmount === 0) {
       throw new Error("Cart is empty");
     }
 
-    /* Создаем заказ */
     const order = await prisma.order.create({
       data: {
         token: cartToken,
         fullName: data.lastName + " " + data.firstName + " " + data.surname,
         email: data.email,
         phone: data.phone,
-        address: data.address + " " + data.index,
+        address: data.locality + " " + data.index,
         comment: data.comment,
         totalAmount: userCart.totalAmount,
         status: OrderStatus.PENDING,
         items: JSON.stringify(userCart.items),
       },
     });
+    const paymentData = await createPayment({
+      amount: order.totalAmount,
+      orderId: order.id,
+      description: 'Оплата заказа #' + order.id,
+    });
 
-    /* Очищаем корзину */
+    if (!paymentData) {
+      throw new Error('Payment data not found');
+    }
+
+    await prisma.order.update({
+      where: {
+        id: order.id,
+      },
+      data: {
+        paymentId: paymentData.id,
+      },
+    });
+
+    const paymentUrl = paymentData.confirmation.confirmation_url;
+
     await prisma.cart.update({
       where: {
         id: userCart.id,
@@ -82,7 +99,7 @@ export async function createOrder(data: CheckoutFormValues) {
       })
     );
 
-    return "https://resend.com/docs/send-with-nextjs";
+    return paymentUrl
   } catch (err) {
     console.log("[CreateOrder] Server error", err);
   }

@@ -5,11 +5,12 @@ import React, { useCallback, useMemo } from "react";
 interface PriceProps {
   priceFrom?: number;
   priceTo?: number;
-  take?: number;
+
 }
 
 interface TakeProps {
   take?: number;
+  page?:number;
 }
 
 interface QueryFilters extends PriceProps, TakeProps {
@@ -32,7 +33,7 @@ export interface Filters {
   prices: PriceProps;
 }
 
-interface ReturnProps extends Filters {
+export interface ReturnProps extends Filters {
   setSizes: (value: string) => void;
   setSeason: (value: string) => void;
   setColors: (value: string) => void;
@@ -86,21 +87,23 @@ export const useFilters = (): ReturnProps => {
   );
 
   const [take, setTake] = React.useState<TakeProps>({
-    take: Number(searchParams.get("take")) || 18,
+    take: Number(searchParams.get("take")) || undefined,
+    page: Number(searchParams.get("page")) || undefined,
   });
 
-  const updateTake = (name: keyof TakeProps, value: number) => {
-    setTake((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    console.log(take);
-    console.log(value);
-  };
+  const updateTake = useCallback(
+    (name: keyof TakeProps, value: number | undefined) => {
+      setTake((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    },
+    []
+  );
+
   const [prices, setPrices] = React.useState<PriceProps>({
     priceFrom: Number(searchParams.get("priceFrom")) || undefined,
     priceTo: Number(searchParams.get("priceTo")) || undefined,
-    take: Number(searchParams.get("take")) || undefined,
   });
 
   const updatePrice = useCallback(
@@ -121,6 +124,7 @@ export const useFilters = (): ReturnProps => {
     clearSeason();
     clearType();
     updateTake("take", 18);
+    updateTake("page", 1);
     updatePrice("priceFrom", undefined);
     updatePrice("priceTo", undefined);
   };

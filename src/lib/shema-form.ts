@@ -6,7 +6,6 @@ export const checkoutFormSchema = z.object({
   surname: z.string().optional(),
   email: z.string().email({ message: 'Введите корректную почту' }),
   phone: z.string().min(10, { message: 'Введите корректный номер телефона' }),
-  address: z.string().min(5, { message: 'Введите корректный адрес' }),
   region: z.string().optional(),
   locality: z.string().min(5, { message: 'Введите корректный адрес' }),
   street: z.string().min(1, { message: 'Введите корректную улицу' }),

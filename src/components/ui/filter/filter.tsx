@@ -8,27 +8,22 @@ import { CheckboxFiltersGroup } from "../chekbox-group";
 import { Button } from "../button";
 import { RangeSlider } from "../range-slider";
 import { Title } from "@/components/title";
-
 import { useSearchParams } from "next/navigation";
-
 import { useDispatch, useSelector } from "@/store/store";
 import {
   fetchFilters,
   getFilters,
   getIsLoading,
 } from "@/store/slices/filtersSlice";
-import { useFilters } from "@/hooks/use-filters";
+import { ReturnProps, useFilters } from "@/hooks/use-filters";
 import { useQuery, useQueryFilters } from "@/hooks/use-query";
 import { fetchProducts } from "@/store/slices/productSlice";
 
-interface IPriceProps {
-  priceFrom: number;
-  priceTo: number;
-}
 
 export const FilterUI: FC<{
   type: "sneakers" | "accessories" | "clothes";
-}> = ({ type }) => {
+  filters: ReturnProps
+}> = ({ type, filters }) => {
   const dispatch = useDispatch();
   const { seasons, sizes, brands, types, colors } = useSelector(getFilters);
   const loading = useSelector(getIsLoading);
@@ -39,7 +34,7 @@ export const FilterUI: FC<{
 
   const searchParams = useSearchParams();
 
-  const filters = useFilters();
+  
 
   useQueryFilters(filters);
 

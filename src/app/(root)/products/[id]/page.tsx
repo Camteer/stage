@@ -1,10 +1,13 @@
 import { CarouselBetter, Product } from "@/components";
+import { Suspense } from "react";
 
 export default function ProductPage() {
   return (
     <>
-      <Product />
-      <CarouselBetter />
+      <Suspense>
+        <Product />
+        <CarouselBetter />
+      </Suspense>
     </>
   );
 }

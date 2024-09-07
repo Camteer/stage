@@ -1,5 +1,5 @@
 "use client";
-import { FC, Suspense, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { ProductUI } from "../ui/product";
 import { Container } from "../container";
 import { useDispatch, useSelector } from "@/store/store";
@@ -33,7 +33,7 @@ export const Product: FC = () => {
   return (
     <>
       <Container className="">
-        <Suspense>
+
           {" "}
           <ProductUI
             id={Number(id)}
@@ -51,7 +51,7 @@ export const Product: FC = () => {
             about={product.description}
             loading={loading}
           ></ProductUI>
-        </Suspense>
+
       </Container>
     </>
   );

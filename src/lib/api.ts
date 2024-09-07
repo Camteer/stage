@@ -20,7 +20,7 @@ export const getFiltersApi = () =>
 
 export const getProductsApi = (query: string = "") =>
   fetch(`${url}/products?${query}`)
-    .then((res) => checkResponse<TCard[]>(res))
+    .then((res) => checkResponse<TCardResponse>(res))
     .then((data) => {
       return data;
     });
