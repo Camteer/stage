@@ -17,6 +17,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { CheckoutPersonalForm } from "../cart-form/checkout-personal-form";
 import { Button } from "../ui";
 import { checkoutFormSchema, CheckoutFormValues } from "@/lib/shema-form";
+import { createOrder } from "@/app/actions";
 
 export const Cart: FC = ({}) => {
   const [submitting, setSubmitting] = React.useState(false);
@@ -44,8 +45,7 @@ export const Cart: FC = ({}) => {
       surname: "",
       email: "",
       phone: "",
-      address: "",
-      comment: "",
+
       region: "",
       locality: "",
       street: "",
@@ -53,11 +53,12 @@ export const Cart: FC = ({}) => {
       frame: "",
       apartment: "",
       index: "",
+      comment: "",
     },
   });
 
-  const onSubmit = (data: CheckoutFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: CheckoutFormValues) => {
+    console.log(data)
   };
   return (
     <Container className={cn("flex-col")}>
@@ -91,7 +92,7 @@ export const Cart: FC = ({}) => {
       </div>
       <div>
         <FormProvider {...form}>
-          <form onSubmit={form.handleSubmit((onSubmit))}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex gap-10">
               <div className="flex flex-col gap-10 flex-1 mt-20">
                 <CheckoutPersonalForm
@@ -101,6 +102,7 @@ export const Cart: FC = ({}) => {
             </div>
             <Button
               type="submit"
+              
               className="w-full h-14 rounded-2xl mt-10 text-base font-bold "
             >
               Перейти к оплате

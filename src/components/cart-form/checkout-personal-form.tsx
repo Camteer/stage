@@ -17,7 +17,7 @@ export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
           placeholder="Фамилия"
         />
         <FormInput
-          name="secondName"
+          name="surname"
           className="text-base"
           placeholder="Отчество"
         />
@@ -49,6 +49,7 @@ export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
         className="text-base"
         placeholder="Комметарий к заказу"
       ></FormTextarea>
+      
     </div>
   );
 };
