@@ -35,7 +35,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
     </address>
     <div className={cn("pl-6")}>
       <Link href={"/"}>
-        <Image
+      <Image
           width={95}
           height={95}
           src={"/logo.svg"}

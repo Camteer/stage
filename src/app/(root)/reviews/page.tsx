@@ -1,3 +1,3 @@
 export default function Reviews() {
-  return <>dedfas</>;
+  return <>Отзывы в доработке</>;
 }

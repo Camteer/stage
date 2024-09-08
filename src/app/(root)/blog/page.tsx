@@ -3,7 +3,7 @@
 export default function Home() {
   return (
     <>
-      dedfas
+      Blog в разработке
     </>
   );
 }

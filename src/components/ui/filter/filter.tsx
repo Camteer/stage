@@ -19,10 +19,9 @@ import { ReturnProps, useFilters } from "@/hooks/use-filters";
 import { useQuery, useQueryFilters } from "@/hooks/use-query";
 import { fetchProducts } from "@/store/slices/productSlice";
 
-
 export const FilterUI: FC<{
   type: "sneakers" | "accessories" | "clothes";
-  filters: ReturnProps
+  filters: ReturnProps;
 }> = ({ type, filters }) => {
   const dispatch = useDispatch();
   const { seasons, sizes, brands, types, colors } = useSelector(getFilters);
@@ -34,8 +33,6 @@ export const FilterUI: FC<{
 
   const searchParams = useSearchParams();
 
-  
-
   useQueryFilters(filters);
 
   const updatePrices = (prices: number[]) => {
@@ -43,9 +40,10 @@ export const FilterUI: FC<{
     filters.setPrices("priceTo", prices[1]);
   };
 
-  const f = useQuery(filters)
+  const f = useQuery(filters);
   const handleFilters = () => {
     dispatch(fetchProducts(f));
+    filters.setTake("page", 1);
   };
 
   return (
@@ -157,7 +155,7 @@ export const FilterUI: FC<{
           disabled={searchParams.size ? false : true}
           onClick={() => {
             filters.clearFilters();
-            dispatch(fetchProducts())
+            dispatch(fetchProducts());
           }}
           className="h-[56px] rounded-[50px] bg-[red] text-white text-[18px] font-bold landing-[21px] disabled:bg-[#B3C0D2]"
         >

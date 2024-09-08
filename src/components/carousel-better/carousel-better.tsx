@@ -19,6 +19,7 @@ import {
 } from "@/store/slices/productSlice";
 import { Skeleton } from "../ui/skeleton";
 
+
 export const CarouselBetter = () => {
   const cards = useSelector(getProductCarousel);
   const loading = useSelector(getIsLoading);
@@ -33,7 +34,7 @@ export const CarouselBetter = () => {
   useEffect(() => {}, [current]);
 
   const chunkedData = [];
-
+  
   for (let i = 0; i < cards.length; i += 4) {
     chunkedData.push(cards.slice(i, i + 4));
   }
@@ -58,7 +59,10 @@ export const CarouselBetter = () => {
                 {Array(4)
                   .fill(0)
                   .map((_, key) => (
-                    <Skeleton key={key} className="rounded-[20px] w-[255px] h-[325px] relative shadow"></Skeleton>
+                    <Skeleton
+                      key={key}
+                      className="rounded-[20px] w-[255px] h-[325px] relative shadow"
+                    ></Skeleton>
                   ))}
               </CarouselItem>
             ) : (

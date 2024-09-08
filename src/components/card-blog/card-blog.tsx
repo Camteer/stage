@@ -1,8 +1,9 @@
-import { FC, useState } from "react";
-import { CardBlogUI } from "@ui";
+
+import { Button, CardBlogUI, Input } from "@ui";
 import { Container } from "../container";
 import { Title } from "../title";
 import { cn } from "@/lib/utils";
+
 
 export const CardBlog = ({}) => {
   const cardData = [
@@ -45,7 +46,7 @@ export const CardBlog = ({}) => {
                 description={item.description}
               />
             ))}
-          </div>  
+          </div>
           <div
             className={cn(
               "min-w-[50%] rounded-[20px] bg-[#29292D] shadow-lg max-h-full shadow-[#165cbf6b] hover:scale-[1.01] transition-all"
@@ -57,7 +58,20 @@ export const CardBlog = ({}) => {
                 "text-[24px] landing-[29.26px] my-[29px] mx-[64px] text-white font-[900] "
               )}
             />
-            <div className="bg-white w-full h-[260px] rounded-[20px]  "></div>
+            <div className="bg-white w-full h-[260px] rounded-[20px]  flex justify-center items-center">
+              <div className="flex w-full max-w-sm ">
+                <Input
+                  className={
+                    "hover:border-black transition-hover w-[500px] focus:border-black ease-in-out border"
+                  }
+                  type="email"
+                  placeholder="Введите ваш email"
+                />
+                <Button variant={"search"} className="w-[300px]" type="submit">
+                  Подписаться
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </Container>

@@ -154,7 +154,7 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
             )}
           </PaginationContent>
         </Pagination>
-      ) : !(Math.ceil(total / size) == page) ? (
+      ) : !(Math.ceil(total / size) == page && Math.ceil(total / size) < 7)  ? (
         <Pagination className="mt-[100px]">
           <PaginationContent className="flex gap-[60px]">
             {page == 1 ? (

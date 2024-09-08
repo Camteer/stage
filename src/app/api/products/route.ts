@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
         ?.split(",")
         .map((take) => Number(take))[0]
     : 18;
-  console.log(query)
+
   const priceTo = query.has("priceTo")
     ? query
         .get("priceTo")

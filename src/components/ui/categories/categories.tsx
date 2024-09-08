@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Button, Input } from "../index";
 import { usePathname } from "next/navigation";
+import { Search } from "lucide-react";
 
 export const CategoriesUI: FC = () => {
   const pathname = usePathname();
@@ -71,7 +72,7 @@ export const CategoriesUI: FC = () => {
               type=""
               placeholder="Поиск"
             />
-            <Button variant={"search"} type="submit"></Button>
+            <Button variant={"search"} type="submit"><Search /></Button>
           </div>
         </div>
       </div>
