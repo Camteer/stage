@@ -75,7 +75,7 @@ export interface CartUI {
   id: number | null;
   userId: number | null;
   totalAmount: number;
-  items: CartItemDTO[]
+  items: CartItemDTO[];
 }
 
 export interface PaymentData {
@@ -117,8 +117,8 @@ export type PaymentCallbackData = {
   object: {
     id: string;
     status: string;
-    amount: { value: string; currency: 'RUB' };
-    income_amount: { value: string; currency: 'RUB' };
+    amount: { value: string; currency: "RUB" };
+    income_amount: { value: string; currency: "RUB" };
     description: string;
     recipient: { account_id: string; gateway_id: string };
     payment_method: {
@@ -130,7 +130,7 @@ export type PaymentCallbackData = {
     captured_at: string;
     created_at: string;
     test: boolean;
-    refunded_amount: { value: string; currency: 'RUB' };
+    refunded_amount: { value: string; currency: "RUB" };
     paid: boolean;
     refundable: true;
     metadata: { order_id: string };
@@ -140,3 +140,6 @@ export type PaymentCallbackData = {
     };
   };
 };
+
+export type LoginlData = { email: string; password: string };
+export type RegisterData = {fullName: string} & LoginlData

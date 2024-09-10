@@ -2,10 +2,10 @@ import { prisma } from "../../../../../prisma/prisma-client";
 import { updateCartTotalAmount } from "../../../../lib/update-cart-total-amount";
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest<{ quantity: number }>, { params }: { params: { id: string } }) {
   try {
     const id = Number(params.id);
-    const data = (await req.json()) as { quantity: number };
+    const data = (await req.json()) ;
     const token = req.cookies.get('cartToken')?.value;
 
     if (!token) {

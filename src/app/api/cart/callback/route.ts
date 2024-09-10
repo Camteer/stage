@@ -5,9 +5,11 @@ import { prisma } from "../../../../../prisma/prisma-client";
 import { sendEmail } from "@/lib/send-email";
 import { OrderSuccessTemplate } from "@/components/send-email/order-successed";
 
-export async function POST(req: NextRequest) {
+
+export async function POST(req: NextRequest<PaymentCallbackData>) {
   try {
-    const body = (await req.json()) as PaymentCallbackData;
+    const body = (await req.json())
+    console.log(body)
 
     const order = await prisma.order.findFirst({
       where: {
@@ -35,7 +37,7 @@ export async function POST(req: NextRequest) {
     if (isSucceeded) {
       await sendEmail(
         order.email,
-        "Next Pizza / Ваш заказ успешно оформлен 🎉",
+        "Stage/ Ваш заказ успешно оформлен 🎉",
         OrderSuccessTemplate({ orderId: order.id, items })
       );
     } else {
@@ -44,5 +46,5 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.log("[Checkout Callback] Error:", error);
     return NextResponse.json({ error: "Server error" });
-  }
+  } 
 }

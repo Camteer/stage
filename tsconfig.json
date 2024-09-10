@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "baseUrl": ".",
-    
+
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -25,6 +25,14 @@
       "@ui": ["src/components/ui"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/card-blog"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/types/next.d.ts",
+    "src/components/card-blog",
+    "@types/*.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

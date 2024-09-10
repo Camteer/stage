@@ -4,7 +4,7 @@ import { prisma } from '../../../../prisma/prisma-client';
 
 export async function GET() {
   
-  const users = await prisma.user.findMany();
+  const users = await prisma.user.findMany({take: 20});
 
   return NextResponse.json(users);
 }

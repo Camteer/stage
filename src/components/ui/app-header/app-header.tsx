@@ -7,6 +7,7 @@ import { Button } from "../button";
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { ButtonCart } from "../batton-cart";
+import { ProfileButton } from "../profile-button/profile-button";
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
   <div
@@ -51,15 +52,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
       )}
     >
       <ButtonCart></ButtonCart>
-      <Button variant={"circle"} size={"icon"}>
-        <Image
-          className={cn("w-auto h-auto")}
-          width={19}
-          height={19}
-          src={"/svg/user.svg"}
-          alt={"1"}
-        />
-      </Button>
+      <ProfileButton></ProfileButton>
       <Button variant={"circle"} size={"icon"}>
         <Image
           className={cn("w-auto h-auto")}

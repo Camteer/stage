@@ -6,7 +6,7 @@ export async function GET(
   req: NextRequest,
   context: { params: { id: string } }
 ) {
-  console.log(context.params.id);
+
 
   const product = await prisma.product.findMany({
     where: { id: Number(context.params.id) },

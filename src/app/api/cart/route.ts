@@ -2,11 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { updateCartTotalAmount } from "../../../lib/update-cart-total-amount";
 import { prisma } from "../../../../prisma/prisma-client";
+import { CreateCartItemValues } from "@/lib/types";
+import { getUserSession } from "@/lib/get-user-session";
 
 export async function GET(req: NextRequest) {
   try {
-    const token = req.cookies.get("cartToken")?.value;
+    const userSession = await getUserSession();
+    const userToken = await prisma.user.findFirst({
+      where: {
+        id: userSession?.id,
+      },
+      include: {
+        cart: {},
+      },
+    });
 
+    let token = req.cookies.get("cartToken")?.value || userToken?.cart?.token;
+    if (userToken?.cart?.token)
+      if (req.cookies.get("cartToken")?.value != userToken?.cart?.token) {
+        token = userToken?.cart?.token;
+      }
     if (!token) {
       return NextResponse.json({ totalAmount: 0, items: [] });
     }
@@ -30,8 +45,9 @@ export async function GET(req: NextRequest) {
         },
       },
     });
-
-    return NextResponse.json(userCart);
+    const resp = NextResponse.json(userCart);
+    resp.cookies.set("cartToken", token);
+    return resp;
   } catch (error) {
     console.log("[CART_GET] Server error", error);
     return NextResponse.json(
@@ -41,9 +57,24 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest<CreateCartItemValues>) {
   try {
-    let token = req.cookies.get("cartToken")?.value;
+    const userSession = await getUserSession();
+    const userToken = await prisma.user.findFirst({
+      where: {
+        id: userSession?.id,
+      },
+      include: {
+        cart: {},
+      },
+    });
+
+    let token = req.cookies.get("cartToken")?.value || userToken?.cart?.token;
+
+    if (userToken?.cart?.token)
+      if (req.cookies.get("cartToken")?.value != userToken?.cart?.token) {
+        token = userToken?.cart?.token;
+      }
 
     if (!token) {
       token = crypto.randomUUID();
@@ -63,7 +94,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const data = (await req.json()) as { productItemId: number; size: number };
+    const data = await req.json();
 
     const findCartItem = await prisma.cartItem.findFirst({
       where: {

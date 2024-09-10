@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.scss";
-import { StoreProvider } from "@/store/StoreProvider";
+import { ClientProvider } from "@/store/StoreProvider";
 
 const inter = Montserrat({
   subsets: ["cyrillic"],
@@ -24,11 +24,11 @@ export default function RootLayout({
         <link data-rh="true" rel="icon" href="/STAGE.svg" />
       </head>
 
-      <StoreProvider>
+      <ClientProvider>
         <body className={inter.className} suppressHydrationWarning={true}>
           {children}
         </body>
-      </StoreProvider>
+      </ClientProvider>
     </html>
   );
 }

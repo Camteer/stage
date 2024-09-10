@@ -55,12 +55,17 @@ export async function GET(req: NextRequest) {
         ?.split(",")
         .map((page) => Number(page))[0]
     : 1;
-  const take = query.has("take")
+  let take = query.has("take")
     ? query
         .get("take")
         ?.split(",")
         .map((take) => Number(take))[0]
     : 18;
+
+  if (take)
+  if (take > 36 || take < 0) {
+    take = 18
+  }
 
   const priceTo = query.has("priceTo")
     ? query

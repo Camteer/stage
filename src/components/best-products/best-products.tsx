@@ -9,6 +9,8 @@ import style from "./best-product.module.scss";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
+
+
 export function BestProducts() {
   const router = useRouter();
   const data = [
