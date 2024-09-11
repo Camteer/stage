@@ -16,7 +16,7 @@ export default function CatalogBrend({
 
   return (
     <>
-      <Container>
+      <Container className="min-h-[2500px]">
         <Suspense>
           <Catalog type={params.type}></Catalog>
         </Suspense>

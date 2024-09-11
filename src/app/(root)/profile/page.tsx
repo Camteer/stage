@@ -1,5 +1,3 @@
-
-
 import { redirect } from 'next/navigation';
 import { prisma } from '../../../../prisma/prisma-client';
 import { ProfileUI } from '@/components/profile';
