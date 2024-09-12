@@ -23,7 +23,7 @@ const initialState: IFilters = {
     colors: [],
     seasons: [],
   },
-  brandsLoading: false
+  brandsLoading: false,
 };
 
 export const fetchFilters = createAsyncThunk(
@@ -44,7 +44,7 @@ const filtersSlice = createSlice({
     getFilters: (state) => state.filters,
     getIsLoading: (state) => state.isLoading,
     getBrands: (state) => state.brands,
-    getBrandsLoading: (state) => state.brandsLoading
+    getBrandsLoading: (state) => state.brandsLoading,
   },
   extraReducers: (builder) => {
     builder
@@ -76,4 +76,5 @@ const filtersSlice = createSlice({
 });
 
 export const filtersSliceReducer = filtersSlice.reducer;
-export const { getFilters, getIsLoading, getBrands, getBrandsLoading } = filtersSlice.selectors;
+export const { getFilters, getIsLoading, getBrands, getBrandsLoading } =
+  filtersSlice.selectors;

@@ -31,7 +31,7 @@ export const RegisterForm: FC = () => {
         fullName: data.fullName,
         password: data.password,
       });
-      router.replace("/profile");
+      
     } catch (error) {}
   };
 

@@ -1,15 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../prisma/prisma-client";
 
-interface IFilters {
-  price: {
-    to: number;
-    from: number;
-  };
-  sizes: number[];
-  season: number[];
-  colors: number[];
-}
+
 
 export async function GET(req: NextRequest) {
   const query = req.nextUrl.searchParams;
@@ -37,9 +29,9 @@ export async function GET(req: NextRequest) {
         ?.split(",")
         .map((id) => Number(id))
     : [];
-  const brand = query.has("brand")
+  const brand = query.has("brands")
     ? query
-        .get("brand")
+        .get("brands")
         ?.split(",")
         .map((id) => Number(id))
     : [];

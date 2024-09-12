@@ -22,7 +22,6 @@ export const Product: FC = () => {
     dispatch(fetchProductId(Number(id)));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const sizes: number[] = [];
   product.size.forEach((item) => {
     sizes.push(item.name);

@@ -20,13 +20,18 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
   className,
   onClickSize,
   onClickPage,
-  page,
+  page = 1,
   loading,
-  size,
+  size = 18,
   total,
 }) => {
-  size = size ? size : 18;
-  page = page ? page : 1;
+  const paginationPrev = page == 1;
+  const maxSize = Math.ceil(total / size);
+  console.log(maxSize)
+  const minSizePagination = 7;
+  const ellipsisGenerate = 3;
+  const firstLinkCount = 2;
+  const generateFirstitems = 5;
   return (
     <div className={cn(``, style.Container, className)}>
       <div className="flex justify-between ">
@@ -108,10 +113,10 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
               ))
           : children}
       </div>
-      {Math.ceil(total / size) <= 6 ? (
+      {maxSize <= 6 ? (
         <Pagination className="mt-[100px]">
           <PaginationContent className="flex gap-[60px]">
-            {page == 1 ? (
+            {paginationPrev ? (
               <></>
             ) : (
               <PaginationItem>
@@ -124,7 +129,7 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
               </PaginationItem>
             )}
 
-            {Array(Math.ceil(total / size))
+            {Array(maxSize)
               .fill(0)
               .map((_, key) => (
                 <PaginationItem key={key}>
@@ -132,15 +137,15 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
                     className="hover:text-black transition-colors"
                     href="#"
                     onClick={() => {
-                      onClickPage(key+1);
+                      onClickPage(key + 1);
                     }}
                   >
-                    {key+1}
+                    {key + 1}
                   </PaginationLink>
                 </PaginationItem>
               ))}
 
-            {page == Math.ceil(total / size) ? (
+            {page == maxSize || maxSize==0 ? (
               <></>
             ) : (
               <PaginationItem>
@@ -154,7 +159,7 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
             )}
           </PaginationContent>
         </Pagination>
-      ) : !(Math.ceil(total / size) == page && Math.ceil(total / size) < 7)  ? (
+      ) : !(maxSize == page && maxSize < minSizePagination) ? (
         <Pagination className="mt-[100px]">
           <PaginationContent className="flex gap-[60px]">
             {page == 1 ? (
@@ -180,7 +185,7 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
                 1
               </PaginationLink>
             </PaginationItem>
-            {page && page > 3 ? (
+            {page && page > ellipsisGenerate ? (
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
@@ -188,48 +193,48 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
               <></>
             )}
 
-            {Array(5)
+            {Array(generateFirstitems)
               .fill(0)
               .map((_, key) => {
-                if (page <= 3) {
+                if (page <= ellipsisGenerate) {
                   return (
                     <PaginationItem key={key}>
                       <PaginationLink
                         href="#"
                         className="hover:text-black transition-colors "
                         onClick={() => {
-                          onClickPage(key + 2);
+                          onClickPage(key + firstLinkCount);
                         }}
                       >
-                        {key + 2}
+                        {key + firstLinkCount}
                       </PaginationLink>
                     </PaginationItem>
                   );
-                } else if (Math.ceil(total / size) - page > 5) {
+                } else if (maxSize - page > generateFirstitems) {
                   return (
-                    <PaginationItem key={key}> 
+                    <PaginationItem key={key}>
                       <PaginationLink
                         className="hover:text-black transition-colors "
                         href="#"
                         onClick={() => {
-                          onClickPage(page + key - 2);
+                          onClickPage(page + key - firstLinkCount);
                         }}
                       >
-                        {page + key - 2}
+                        {page + key - firstLinkCount}
                       </PaginationLink>
                     </PaginationItem>
                   );
-                } else if (Math.ceil(total / size) - page <= 3) {
+                } else if (maxSize - page <= ellipsisGenerate) {
                   return (
                     <PaginationItem key={key}>
                       <PaginationLink
                         className="hover:text-black transition-color"
                         href="#"
                         onClick={() => {
-                          onClickPage(Math.ceil(total / size) - 5 + key);
+                          onClickPage(maxSize - generateFirstitems + key);
                         }}
                       >
-                        {Math.ceil(total / size) - 5 + key}
+                        {maxSize - generateFirstitems + key}
                       </PaginationLink>
                     </PaginationItem>
                   );
@@ -240,15 +245,15 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
                       className="hover:text-black transition-colors"
                       href="#"
                       onClick={() => {
-                        onClickPage(page + key - 2);
+                        onClickPage(page + key - firstLinkCount);
                       }}
                     >
-                      {page + key - 2}
+                      {page + key - firstLinkCount}
                     </PaginationLink>
                   </PaginationItem>
                 );
               })}
-            {page && Math.ceil(total / size) - page > 3 ? (
+            {page && maxSize - page > ellipsisGenerate ? (
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
@@ -260,13 +265,13 @@ export const CataloContainerUI: FC<TCataloContainerUIProps> = ({
                 className="hover:text-black transition-colors"
                 href="#"
                 onClick={() => {
-                  onClickPage(Math.ceil(total / size));
+                  onClickPage(maxSize);
                 }}
               >
                 {Math.ceil(total / size)}
               </PaginationLink>
             </PaginationItem>
-            {page == Math.ceil(total / size) ? (
+            {page == maxSize || maxSize == 0 ? (
               <></>
             ) : (
               <PaginationItem>

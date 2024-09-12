@@ -30,7 +30,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/types/next.d.ts",
     "src/components/card-blog",
     "@types/*.d.ts"
   ],

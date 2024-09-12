@@ -40,16 +40,19 @@ export const ProductUI: FC<TProductUIProps> = ({
     <>
       <div>
         <div>
-          <Title title={title} className={cn("uppercase")}></Title>
+          {!title ? (
+            <Skeleton className="w-[729px] h-[48px] rounded-[20px]"></Skeleton>
+          ) : (
+            <Title title={title} className={cn("uppercase")}></Title>
+          )}
+
           <p className={cn("text-[#B3C0D2] pt-5 font-normal")}>
             Артикул {article}
           </p>
         </div>
         <div className={cn("mt-4 flex w-full justify-between  min-w-[1110px]")}>
-          {loading ? (
-            <Skeleton className="w-[729px] h-[613px]"></Skeleton>
-          ) : (
-            <div className="w-[729px] relative">
+          <div className="w-[729px] relative">
+            {images[0] ? (
               <Image
                 height={540}
                 width={729}
@@ -57,23 +60,25 @@ export const ProductUI: FC<TProductUIProps> = ({
                 src={images[0]}
                 alt={"imagePre"}
               ></Image>
-              <span className="absolute top-[15px] right-[15px] ">
-                <Heart size={45} className={cn("", style.heart)} />
-              </span>
-              <div className={cn("flex w-full justify-between mt-5")}>
-                {images.slice(1).map((image, index) => (
-                  <Image
-                    key={index}
-                    height={118}
-                    width={160}
-                    src={image}
-                    className={cn("rounded-[20px]")}
-                    alt={"imagePre "}
-                  ></Image>
-                ))}
-              </div>
+            ) : (
+              <Skeleton className="w-[729px] h-[486px]"></Skeleton>
+            )}
+            <span className="absolute top-[15px] right-[15px] rounded-[20px]">
+              <Heart size={45} className={cn("", style.heart)} />
+            </span>
+            <div className={cn("flex w-full justify-between mt-5")}>
+              {images.length ? images.slice(1).map((image, index) => (
+                <Image
+                  key={index}
+                  height={118}
+                  width={160}
+                  src={image}
+                  className={cn("rounded-[20px]")}
+                  alt={"imagePre "}
+                ></Image>
+              )) : Array(4).fill(0).map((_, key) => <Skeleton key={key} className="w-[160px] h-[118px] rounded-[20px]"></Skeleton>) }
             </div>
-          )}
+          </div>
 
           <div
             className={cn(
@@ -239,7 +244,7 @@ export const ProductUI: FC<TProductUIProps> = ({
 
           <div className="flex justify-between mt-[50px]">
             <div className="w-[820px] text-[18px] landing-[22px] font-normal">
-              {stateActiveNav == "Описание"
+              {stateActiveNav == "Описание" && description
                 ? description
                 : stateActiveNav == "Оплата и доставка"
                 ? "Оплата и доставка info"
@@ -249,26 +254,32 @@ export const ProductUI: FC<TProductUIProps> = ({
                 ? "Гарантии info"
                 : stateActiveNav == "О товаре"
                 ? about
-                : ""}
+                : <Skeleton className="w-[820px] h-[135px]"></Skeleton>}
             </div>
             <span className="w-[349px] text-[#002C6A] text-[20px] leading-[24.38px] flex flex-col gap-2">
               <div className="flex justify-between">
                 <p className="text-end w-[100px]">Категории </p>
-                <p className="text-start  min-w-[200px] font-bold">
+                {categories ? <p className="text-start  min-w-[200px] font-bold">
                   {categories}
-                </p>
+                </p> : <Skeleton className="w-[200px] h-[24.375px]"></Skeleton>}
               </div>
               <div className="flex justify-between">
                 <p className="text-end w-[100px]">Модель </p>
-                <p className="text-start  min-w-[200px] font-bold">{model}</p>
+                {model ? <p className="text-start  min-w-[200px] font-bold">
+                  {model}
+                </p> : <Skeleton className="w-[200px] h-[24.375px]"></Skeleton>}
               </div>
               <div className="flex justify-between">
                 <p className="text-end w-[100px]">Сезон </p>
-                <p className="text-start  min-w-[200px] font-bold">{season}</p>
+                {season ? <p className="text-start  min-w-[200px] font-bold">
+                  {season}
+                </p> : <Skeleton className="w-[200px] h-[24.375px]"></Skeleton>}
               </div>
               <div className="flex justify-between">
                 <p className="text-end w-[100px]">Цвет </p>
-                <p className="text-start min-w-[200px] font-bold">{color}</p>
+                {color ? <p className="text-start  min-w-[200px] font-bold">
+                  {color}
+                </p> : <Skeleton className="w-[200px] h-[24.375px]"></Skeleton>}
               </div>
             </span>
           </div>

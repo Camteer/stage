@@ -30,13 +30,13 @@ export const CarouselBetter = () => {
   }, []);
 
   const [current, setCurrent] = useState(0);
-
+  const chankLenght = 4
   useEffect(() => {}, [current]);
 
   const chunkedData = [];
   
-  for (let i = 0; i < cards.length; i += 4) {
-    chunkedData.push(cards.slice(i, i + 4));
+  for (let i = 0; i < cards.length; i += chankLenght) {
+    chunkedData.push(cards.slice(i, i + chankLenght));
   }
 
   return (
@@ -56,7 +56,7 @@ export const CarouselBetter = () => {
           <CarouselContent className=" h-[600px]">
             {loading ? (
               <CarouselItem className="flex justify-between pt-[107px] pl-[120px] pr-[100px]">
-                {Array(4)
+                {Array(chankLenght)
                   .fill(0)
                   .map((_, key) => (
                     <Skeleton
