@@ -1,4 +1,4 @@
-import { PayOrderTemplate } from "@/components/send-email/pay-order";
+
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 const user = process.env.EMAIL_KEY;
@@ -8,7 +8,7 @@ const pass = process.env.PASSWORD_EMAIL;
 export async function POST(req: NextRequest) {
   try {
     const { name, email, message } = await req.json();
-    console.log(user)
+    
     const transporter = nodemailer.createTransport({
       host: "smtp.yandex.ru",
       port: 465,

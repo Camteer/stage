@@ -4,7 +4,7 @@ interface Props {
   code: string;
 }
 
-export const VerificationUserTemplate: React.FC<Props> = ({ code }) => (
+export const VerificationUserTemplate = ( code: string) => (
   <div>
     <p>
       Код подтверждения: <h2>{code}</h2>

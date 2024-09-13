@@ -10,6 +10,7 @@ import { createPayment } from "@/lib/create-payment";
 import { hashSync } from "bcrypt";
 import { VerificationUserTemplate } from "@/components/send-email/verification";
 import { getUserSession } from "@/lib/get-user-session";
+import { SendMailNode } from "@/lib/send-email-nodemail";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
@@ -92,14 +93,25 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
-    await sendEmail(
+    // await sendEmail(
+    //   data.email,
+    //   "Stage / Оплатите заказ #" + order.id,
+    //   PayOrderTemplate({
+    //     orderId: order.id,
+    //     totalAmount: order.totalAmount,
+    //     paymentUrl: "https://resend.com/docs/send-with-nextjs",
+    //   })
+    // );
+
+    await SendMailNode(
       data.email,
-      "Stage / Оплатите заказ #" + order.id,
-      PayOrderTemplate({
-        orderId: order.id,
-        totalAmount: order.totalAmount,
-        paymentUrl: "https://resend.com/docs/send-with-nextjs",
-      })
+      PayOrderTemplate(
+        order.id,
+        order.totalAmount,
+        "https://resend.com/docs/send-with-nextjs"
+      ),
+      data.comment,
+      data.lastName
     );
     const userSession = await getUserSession();
 
@@ -209,12 +221,9 @@ export async function registerUser(body: Prisma.UserCreateInput) {
       },
     });
 
-    await sendEmail(
+    await SendMailNode(
       createdUser.email,
-      "📝 Подтверждение регистрации",
-      VerificationUserTemplate({
-        code,
-      })
+      VerificationUserTemplate(code)
     );
   } catch (err) {
     console.log("Error [CREATE_USER]", err);
