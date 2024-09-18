@@ -123,8 +123,8 @@ export const useFilters = (): ReturnProps => {
     clearColors();
     clearSeason();
     clearType();
-    updateTake("take", 18);
-    updateTake("page", 1);
+    updateTake("take", undefined);
+    updateTake("page", undefined);
     updatePrice("priceFrom", undefined);
     updatePrice("priceTo", undefined);
   };

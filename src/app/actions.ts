@@ -4,7 +4,6 @@ import { CheckoutFormValues } from "@/lib/shema-form";
 import { prisma } from "../../prisma/prisma-client";
 import { cookies } from "next/headers";
 import { OrderStatus, Prisma } from "@prisma/client";
-import { sendEmail } from "@/lib/send-email";
 import { PayOrderTemplate } from "@/components/send-email/pay-order";
 import { createPayment } from "@/lib/create-payment";
 import { hashSync } from "bcrypt";

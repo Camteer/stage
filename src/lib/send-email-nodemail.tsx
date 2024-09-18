@@ -10,7 +10,7 @@ type MailParams = {
   name: string;
 };
 
-export async function SendMailNode(email: string,template: ReactElement,  message: string='', name: string='') {
+export async function SendMailNode(email: string,template: ReactElement, name: string='',  message: string='') {
     const emailHtml = await render(template);
     const transporter = nodemailer.createTransport({
         host: "smtp.yandex.ru",

@@ -4,6 +4,7 @@ import {
   TCard,
   TCardResponse,
   TFiltersResponse,
+  UserOrders,
 } from "./types";
 
 const url = process.env.NEXT_PUBLIC_API_URL;
@@ -79,6 +80,26 @@ export const deleteCartItemApi = (id: number) =>
     },
   })
     .then((res) => checkResponse<CartUI>(res))
+    .then((data) => {
+      return data;
+    });
+
+export const VerifiendUserApi = (code: string) =>
+  fetch(`${url}/auth/verifiend?code=${code}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+export const getUserOrderApi = () =>
+  fetch(`${url}/orders`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => checkResponse<UserOrders>(res))
     .then((data) => {
       return data;
     });

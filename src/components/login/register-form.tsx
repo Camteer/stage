@@ -9,7 +9,7 @@ import { registerUser } from "@/app/actions";
 import { formRegisterSchema, TFormRegisterValues } from "@/lib/shema-form";
 import { FormInput } from "../form-input";
 import { Button } from "../ui";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { Title } from "../title";
 
 export const RegisterForm: FC = () => {
@@ -25,14 +25,20 @@ export const RegisterForm: FC = () => {
   });
 
   const onSubmit = async (data: TFormRegisterValues) => {
+    let flag = false
     try {
       await registerUser({
         email: data.email,
         fullName: data.fullName,
         password: data.password,
       });
-      
-    } catch (error) {}
+      flag = true
+    } catch (error) {
+      flag = false
+    }
+    if (flag) { 
+      router.replace('/login/verifiend')
+    }
   };
 
   return (

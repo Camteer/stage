@@ -1,4 +1,3 @@
-import { Container } from "@/components/container";
 import style from "./footer.module.scss";
 import React, { FC } from "react";
 import { cn } from "@/lib/utils";

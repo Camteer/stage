@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../../prisma/prisma-client";
 import { sendEmail } from "@/lib/send-email";
 import { OrderSuccessTemplate } from "@/components/send-email/order-successed";
+import { SendMailNode } from "@/lib/send-email-nodemail";
 
 
 export async function POST(req: NextRequest<PaymentCallbackData>) {
@@ -35,11 +36,12 @@ export async function POST(req: NextRequest<PaymentCallbackData>) {
     const items = JSON.parse(order?.items as string) as CartItemDTO[];
 
     if (isSucceeded) {
-      await sendEmail(
+      await SendMailNode(
         order.email,
-        "Stage/ Ваш заказ успешно оформлен 🎉",
-        OrderSuccessTemplate({ orderId: order.id, items })
+        OrderSuccessTemplate(  order.id, items )
       );
+        
+        
     } else {
       // Письмо о неуспешной оплате
     }

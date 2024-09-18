@@ -141,5 +141,20 @@ export type PaymentCallbackData = {
   };
 };
 
+export type Orders = {
+  paymentId: string;
+  updatedAt: string;
+  items: string;
+  totalAmount: number;
+  status: string
+};
+
+export type UserOrders = {
+  orders: Orders[];
+};
+
+
+
+
 export type LoginlData = { email: string; password: string };
-export type RegisterData = {fullName: string} & LoginlData
+export type RegisterData = { fullName: string } & LoginlData;

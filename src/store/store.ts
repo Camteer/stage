@@ -8,11 +8,13 @@ import {
 import { filtersSliceReducer } from "./slices/filtersSlice";
 import { productsSliceReducer } from "./slices/productSlice";
 import { cartSliceReducer } from "./slices/cartSlice";
+import { ordersSliceReducer } from "./slices/ordersSlice";
 
 export const rootReducer = combineReducers({
   filters: filtersSliceReducer,
   products: productsSliceReducer,
   cart: cartSliceReducer,
+  orders: ordersSliceReducer,
 });
 
 const store = configureStore({
