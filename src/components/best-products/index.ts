@@ -1,0 +1,1 @@
+export {BestProducts} from './best-products'

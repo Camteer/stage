@@ -1,6 +1,8 @@
 "use client";
 import { FC, useState } from "react";
 import { CardUI } from "@ui";
+import { TCardUIProps } from "../ui/card/type";
+import { useRouter } from "next/navigation";
 
 export const Card: FC<TCardUIProps> = ({
   imageUrl,
@@ -12,13 +14,17 @@ export const Card: FC<TCardUIProps> = ({
   StatusLike,
 }) => {
   const [showSize, setShowSize] = useState(false);
-
+  const router = useRouter()
   const OnMouseEnter = () => {
     setShowSize(true);
   };
 
   const OnMouseLeave = () => {
     setShowSize(false);
+  };
+
+  const onHandleSelectSize = (size: string | number) => {
+    router.replace(`/products/${id}?size=${size}`)
   };
 
   return (
@@ -31,8 +37,9 @@ export const Card: FC<TCardUIProps> = ({
       size={size}
       showSizes={showSize}
       StatusLike={StatusLike}
-      OnMouseEnter={OnMouseEnter}
-      OnMouseLeave={OnMouseLeave}
+      onMouseEnter={OnMouseEnter}
+      onMouseLeave={OnMouseLeave}
+      onSizeEnter={onHandleSelectSize}
     />
   );
 };

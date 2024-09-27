@@ -1,0 +1,24 @@
+.heart {
+  transition: transform 0.3s ease;
+  fill: #b3c0d2;
+  stroke: #b3c0d2;
+}
+
+.heart:hover {
+  transform: scale(1.2);
+}
+
+.heart:active {
+  transform: scale(1.3);
+}
+
+.size:hover {
+  mix-blend-mode: difference;
+  color: white;
+  font-weight: 700;
+  background-color: #ff1818;
+}
+
+.sizeContainer {
+  box-shadow: 40px 57px 89px hsla(215, 100%, 21%, 0.24);
+}

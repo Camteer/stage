@@ -242,6 +242,7 @@ const CarouselNext = React.forwardRef<
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      onClickCapture={()=> {}}
       {...props}
     >
       <Arrow />

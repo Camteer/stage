@@ -5,6 +5,9 @@ import style from "./app-header.module.scss";
 import Image from "next/image";
 import { Button } from "../button";
 import Link from "next/link";
+import { Mail, Phone } from "lucide-react";
+import { ButtonCart } from "../batton-cart";
+import { ProfileButton } from "../profile-button/profile-button";
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
   <div
@@ -15,25 +18,17 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
   >
     <address className={cn("flex flex-col justify-center gap-2")}>
       <span className={cn("flex gap-3")}>
-        <Image
-          className={cn("w-auto h-auto")}
-          width={20}
-          height={20}
-          src={"/svg/phone.svg"}
-          alt={""}
-        />
+        <a className={cn("no-underline")} href="tel:+79519992834">
+          <Phone stroke="white" fill="#002C6A" size={24} />
+        </a>
         <a className={cn("no-underline")} href="tel:+79519992834">
           +7 951 999 28 34
         </a>
       </span>
       <span className={cn("flex gap-3")}>
-        <Image
-          className={cn("w-auto h-auto")}
-          width={20}
-          height={20}
-          src={"/svg/email.svg"}
-          alt={""}
-        />
+        <a className={cn("no-underline")} href="mailto:info@stageboxbrand.ru">
+          <Mail stroke="white" fill="#002C6A" size={24} />
+        </a>
         <a className={cn("no-underline")} href="mailto:info@stageboxbrand.ru">
           info@stageboxbrand.ru
         </a>
@@ -41,12 +36,12 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
     </address>
     <div className={cn("pl-6")}>
       <Link href={"/"}>
-        <Image
+      <Image
           width={95}
           height={95}
-          src={"/logo.png"}
+          src={"/logo.svg"}
           alt={"Logo"}
-          className="w-auto h-auto"
+          className=""
         />
       </Link>
     </div>
@@ -56,24 +51,8 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
         style.headerNav
       )}
     >
-      <Button variant={"circle"} size={"icon"}>
-        <Image
-          className={cn("w-auto h-auto")}
-          width={19}
-          height={19}
-          src={"/svg/bag.svg"}
-          alt={"1"}
-        />
-      </Button>
-      <Button variant={"circle"} size={"icon"}>
-        <Image
-          className={cn("w-auto h-auto")}
-          width={19}
-          height={19}
-          src={"/svg/user.svg"}
-          alt={"1"}
-        />
-      </Button>
+      <ButtonCart></ButtonCart>
+      <ProfileButton></ProfileButton>
       <Button variant={"circle"} size={"icon"}>
         <Image
           className={cn("w-auto h-auto")}

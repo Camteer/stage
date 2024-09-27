@@ -11,179 +11,32 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import { Card } from "../card";
+import { useDispatch, useSelector } from "@/store/store";
+import {
+  fetchProductsCarosel,
+  getIsLoading,
+  getProductCarousel,
+} from "@/store/slices/productSlice";
+import { Skeleton } from "../ui/skeleton";
+
 
 export const CarouselBetter = () => {
-  const cardData = [
-    {
-      _id: 67,
-      id: "1",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 78,
-      id: "2",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 78073,
-      id: "3",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 890,
-      id: "4",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 9680,
-      id: "5",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 9580,
-      id: "6",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 9480,
-      id: "7",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 9380,
-      id: "8",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 9280,
-      id: "9",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-    {
-      _id: 9180,
-      id: "10",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1y5qhi3TMhu7L3DyaJpPuxtqxVuRFpgqeaA&s",
-      title: "КРОССОВКИ ADIDAS EQT SUPPORT ADV PK",
-      article: 19666,
-      price: 3290,
-      size: [35, 36, 37, 38, 39, 40, 41, 42],
-      StatusLike: false,
-      season: "winter",
-      color: "red",
-      categories: "men",
-      brand: "addidas",
-      sale: false,
-    },
-  ];
+  const cards = useSelector(getProductCarousel);
+  const loading = useSelector(getIsLoading);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProductsCarosel("take=20&page=2"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [current, setCurrent] = useState(0);
-
+  const chankLenght = 4
   useEffect(() => {}, [current]);
 
   const chunkedData = [];
-
-  for (let i = 0; i < cardData.length; i += 4) {
-    chunkedData.push(cardData.slice(i, i + 4));
+  
+  for (let i = 0; i < cards.length; i += chankLenght) {
+    chunkedData.push(cards.slice(i, i + chankLenght));
   }
 
   return (
@@ -201,40 +54,65 @@ export const CarouselBetter = () => {
           className="w-full "
         >
           <CarouselContent className=" h-[600px]">
-            {}
-            {chunkedData.map((item, index) => (
-              <CarouselItem
-                key={index}
-                className="flex justify-between pt-[107px] pl-[120px] pr-[100px]"
-              >
-                {item.map((card, _) => (
-                  <Card
-                    key={card._id}
-                    imageUrl={card.imageUrl}
-                    title={card.title}
-                    article={card.article}
-                    price={card.price}
-                    size={card.size}
-                    StatusLike={card.StatusLike}
-                    id={card.id}
-                  />
-                ))}
+            {loading ? (
+              <CarouselItem className="flex justify-between pt-[107px] pl-[120px] pr-[100px]">
+                {Array(chankLenght)
+                  .fill(0)
+                  .map((_, key) => (
+                    <Skeleton
+                      key={key}
+                      className="rounded-[20px] w-[255px] h-[325px] relative shadow"
+                    ></Skeleton>
+                  ))}
               </CarouselItem>
-            ))}
+            ) : (
+              chunkedData.map((item, index) => (
+                <CarouselItem
+                  key={index}
+                  className="flex justify-between pt-[107px] pl-[120px] pr-[100px]"
+                >
+                  {item.map((card, index) => (
+                    <Card
+                      key={index}
+                      imageUrl={card.image[0]}
+                      title={card.name}
+                      article={12345}
+                      price={card.price}
+                      size={card.size}
+                      StatusLike={false}
+                      id={card.id}
+                    />
+                  ))}
+                </CarouselItem>
+              ))
+            )}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious
+            onClickCapture={() => {
+              setCurrent((prev) => prev - 1);
+            }}
+          />
+          <CarouselNext
+            onClickCapture={() => {
+              setCurrent((prev) => prev + 1);
+            }}
+          />
         </Carousel>
         <div className="flex justify-center gap-[85px] ">
-          {chunkedData.map((_, index) => (
-            <div
-              key={index}
-              className={cn(
-                "w-[10px] h-[10px] rounded-full ",
-                `${current == index ? "bg-[#FF1818]" : "bg-slate-500"}`
-              )}
-            ></div>
-          ))}
+          {loading ? (
+            <Skeleton className="rounded-[20px] w-[475px] h-[10px] relative shadow"></Skeleton>
+          ) : (
+            chunkedData.map((_, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "w-[10px] h-[10px] rounded-full ",
+                  `${current == index ? "bg-[#FF1818]" : "bg-slate-500"}`
+                )}
+              ></div>
+            ))
+          )}
+          {}
         </div>
       </div>
     </>

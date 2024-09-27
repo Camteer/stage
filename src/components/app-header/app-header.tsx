@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { AppHeaderUI } from "@ui";
 
-
-export const AppHeader: FC = () => <AppHeaderUI />;
+export const AppHeader: FC = () => {
+  return <AppHeaderUI />;
+};

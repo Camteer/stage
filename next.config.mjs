@@ -1,19 +1,25 @@
 /** @type {import('next').NextConfig} */
+import { hostname } from "os";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = {
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname:   "**.gstatic.com"
+        hostname: "**.gstatic.com",
       },
       {
         protocol: "https",
-        hostname:   "**.figma.com"
+        hostname: "**.figma.com",
+      },
+      {
+        protocol: "https",
+        hostname: "dummyimage.com",
       },
     ],
   },
