@@ -1,5 +1,11 @@
 import { AppHeader, Categories, Footer } from "@/components";
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Stage пет-проект Евгения',
+  description: 'Stage пет-проект Евгения',
+}
 
 export default function HomeLayout({
   children,
