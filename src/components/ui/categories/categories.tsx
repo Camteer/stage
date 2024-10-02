@@ -44,7 +44,7 @@ export const CategoriesUI: FC = () => {
           >
             Аксессуары
           </Link>
-          <Link
+          {/* <Link
             className={cn(
               " text-2xl mr-[25px] leading-7 hover:text-[--hover-color-text] font-bold transition-colors ease-linear active:text-[--hover-color-text]",
               `${pathname.slice(1, 5) == "blog" ? "text-[#FF1818]" : ""}`
@@ -61,9 +61,9 @@ export const CategoriesUI: FC = () => {
             href={"/reviews"}
           >
             Отзывы
-          </Link>
+          </Link> */}
         </div>
-        <div>
+        {/* <div>
           <div className="flex w-full max-w-sm ">
             <Input
               className={
@@ -74,7 +74,7 @@ export const CategoriesUI: FC = () => {
             />
             <Button variant={"search"} type="submit"><Search /></Button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

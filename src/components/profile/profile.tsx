@@ -51,7 +51,7 @@ export const ProfileUI: FC<Props> = ({ data }) => {
 
   function formatDate(dateString: string) {
     const date = new Date(dateString);
-    
+
     return new Intl.DateTimeFormat("ru-RU").format(date);
   }
 
@@ -150,8 +150,6 @@ export const ProfileUI: FC<Props> = ({ data }) => {
                 pending={item.status == "SUCCEEDED" ? true : false}
               ></OrdersUI>
             ))}
-            
-            
           </div>
         </div>
       </Container>

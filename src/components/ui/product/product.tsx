@@ -63,9 +63,9 @@ export const ProductUI: FC<TProductUIProps> = ({
                 alt={"imagePre"}
               ></Image>
             )}
-            <span className="absolute top-[15px] right-[15px] rounded-[20px]">
+            {/* <span className="absolute top-[15px] right-[15px] rounded-[20px]">
               <Heart size={45} className={cn("", style.heart)} />
-            </span>
+            </span> */}
             <div className={cn("flex w-full justify-between mt-5")}>
               {!images.length || loading
                 ? Array(4)
@@ -166,7 +166,7 @@ export const ProductUI: FC<TProductUIProps> = ({
                 }
                 onClick={() => {
                   addItem({ productItemId: id, size: selectedSize });
-                  router.replace("/cart");
+                  router.push("/cart");
                 }}
               >
                 Купить сейчас
@@ -258,11 +258,11 @@ export const ProductUI: FC<TProductUIProps> = ({
               {stateActiveNav == "Описание" && description && !loading ? (
                 description
               ) : stateActiveNav == "Оплата и доставка" ? (
-                "Оплата и доставка info"
+                "Мы принимаем оплату всеми популярными способами: банковские карты, электронные кошельки и перевод по реквизитам. Доставка осуществляется по всей территории страны с возможностью выбора удобного курьера или пункта самовывоза. Сроки доставки зависят от региона и составляют от 2 до 7 рабочих дней."
               ) : stateActiveNav == "Обмен и возврат" ? (
-                "Обмен и возврат info"
+                "Вы можете вернуть или обменять товар в течение 14 дней с момента получения, при условии сохранения товарного вида и упаковки. Обработка заявок на возврат или обмен занимает до 5 рабочих дней. Мы обеспечим удобный процесс возврата через курьера или почтовую службу."
               ) : stateActiveNav == "Гарантии" ? (
-                "Гарантии info"
+                "На все наши товары предоставляется гарантия качества от производителя сроком от 6 месяцев до 2 лет в зависимости от категории. В случае заводского брака мы бесплатно заменим товар или вернем его стоимость."
               ) : stateActiveNav == "О товаре" ? (
                 about
               ) : (

@@ -24,7 +24,7 @@ export const Card: FC<TCardUIProps> = ({
   };
 
   const onHandleSelectSize = (size: string | number) => {
-    router.replace(`/products/${id}?size=${size}`)
+    router.push(`/products/${id}?size=${size}`)
   };
 
   return (

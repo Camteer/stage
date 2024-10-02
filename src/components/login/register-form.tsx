@@ -37,7 +37,7 @@ export const RegisterForm: FC = () => {
       flag = false
     }
     if (flag) { 
-      router.replace('/login/verifiend')
+      router.push('/login/verifiend')
     }
   };
 

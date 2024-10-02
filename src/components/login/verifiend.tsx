@@ -41,7 +41,7 @@ export function Verifiend() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     await VerifiendUserApi(data.pin).then((res) => {
       if (res.ok) {
-        router.replace("/login");
+        router.push("/login");
       } else {
         form.reset({ pin: "" });
       }

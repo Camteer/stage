@@ -52,7 +52,7 @@ export function Brands() {
                 <CarouselItem
                   key={index}
                   onClick={() => {
-                    router.replace(`/catalog/sneakers?brands=${index + 1}`);
+                    router.push(`/catalog/sneakers?brands=${index + 1}`);
                   }}
                   className="pl-1 md:basis-[20%] lg:basis-[20%] cursor-pointer"
                 >

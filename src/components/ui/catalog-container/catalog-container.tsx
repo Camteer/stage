@@ -1,5 +1,5 @@
-import { FC } from "react";
 
+import { FC } from "react";
 import { cn } from "@/lib/utils";
 import style from "./catalog-container.module.scss";
 import { Button } from "../button";

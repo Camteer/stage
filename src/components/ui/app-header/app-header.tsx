@@ -47,13 +47,13 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
     </div>
     <nav
       className={cn(
-        "flex justify-between items-center w-[170px]",
+        "flex justify-around items-center w-[170px]",
         style.headerNav
       )}
     >
       <ButtonCart></ButtonCart>
       <ProfileButton></ProfileButton>
-      <Button variant={"circle"} size={"icon"}>
+      {/* <Button variant={"circle"} size={"icon"}>
         <Image
           className={cn("w-auto h-auto")}
           width={19}
@@ -61,7 +61,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({}) => (
           src={"/svg/like.svg"}
           alt={"1"}
         />
-      </Button>
+      </Button> */}
     </nav>
   </div>
 );
