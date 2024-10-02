@@ -11,7 +11,7 @@ export const VerificationUserTemplate = ( code: string) => (
     </p>
 
     <p>
-      <a href={`http://localhost:3000/api/auth/verifiend?code=${code}`}>Подтвердить регистрацию</a>
+      <a href={`https://stage-pi-steel.vercel.app/api/auth/verifiend?code=${code}`}>Подтвердить регистрацию</a>
     </p>
   </div>
 );

@@ -18,7 +18,6 @@ import { CheckoutPersonalForm } from "../cart-form/checkout-personal-form";
 import { Button } from "../ui";
 import { checkoutFormSchema, CheckoutFormValues } from "@/lib/shema-form";
 import { createOrder } from "@/app/actions";
-import { Skeleton } from "../ui/skeleton";
 
 export const Cart: FC = ({}) => {
   const dispatch = useDispatch();

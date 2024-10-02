@@ -107,7 +107,7 @@ export async function createOrder(data: CheckoutFormValues) {
       PayOrderTemplate(
         order.id,
         order.totalAmount,
-        "https://resend.com/docs/send-with-nextjs"
+        paymentUrl
       ),
       data.comment,
       data.lastName
