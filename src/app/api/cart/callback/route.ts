@@ -2,7 +2,6 @@ import { CartItemDTO, PaymentCallbackData } from "@/lib/types";
 import { OrderStatus } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../../../../prisma/prisma-client";
-import { sendEmail } from "@/lib/send-email";
 import { OrderSuccessTemplate } from "@/components/send-email/order-successed";
 import { SendMailNode } from "@/lib/send-email-nodemail";
 
