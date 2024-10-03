@@ -56,7 +56,7 @@ export const CardUI: React.FC<TCardUIProps> = ({
             </span>
 
             <Button variant={"like"} className="bg-transparent p-0 ">
-              <Heart size={25} className={cn("fill-red-400", style.heart)} />
+              {/* <Heart size={25} className={cn("fill-red-400", style.heart)} /> */}
             </Button>
           </div>
         </div>
